@@ -1,782 +1,1037 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heyer Livin' — Interactive Data Simulator</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRANSMISSION — Cultural Compass | Heyer Livin'</title>
+<meta name="description" content="Structural constraint infrastructure. One formula. Every domain. 534 years. R = x/(x+y²). Cultural Compass, Oracle, Seasonal Guides, 35-Domain Engine."/>
+<meta property="og:title" content="TRANSMISSION | Heyer Livin LLC"/>
+<meta property="og:description" content="System and Method for Detecting, Quantifying, and Classifying Structural Constraint in Empirical Distributions"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://glyphhrlvn4culturalnav.space"/>
+<link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --red:#c0281a;--blue:#1a3fc0;--gold:#c9a84c;
-  --black:#080808;--white:#ede8e0;
+/* ═══════════════════════════════════════════════════════════════
+   HEYER LIVIN' DESIGN SYSTEM — MERGED
+   Source: style.css (heyerlivin.com) + GLYPH_DICTIONARY.html
+   Colors: #0a0a0f, #c9a84c, #2a9d8f, #c94040
+   Fonts: Boska (display), Satoshi (body), Source Code Pro (mono)
+   ═══════════════════════════════════════════════════════════════ */
+:root,[data-theme="dark"]{
+  --bg:#0a0a0f;--surface:#111118;--surface2:#16161f;--surface-off:#1a1a24;
+  --border:#2a2a38;--divider:#22222e;
+  --text:#e8e6e0;--text-m:#8a8880;--text-f:#4a4a52;--text-inv:#0a0a0f;
+  --gold:#c9a84c;--gold-d:#7a6230;--gold-g:rgba(201,168,76,.15);--gold-h:#e0bc6a;
+  --teal:#2a9d8f;--teal-d:#1a6058;--teal-g:rgba(42,157,143,.12);
+  --red:#c94040;--red-d:#7a2828;--red-g:rgba(201,64,64,.12);
+  --blue:#0066CC;--blue-g:rgba(0,102,204,.12);
+  --fire:#FF6B35;--fire-g:rgba(255,107,53,.12);
+  --font-d:'Boska','Georgia',serif;--font-b:'Satoshi','Inter',sans-serif;--font-m:'Source Code Pro','Courier New',monospace;
+  --tr:200ms cubic-bezier(.16,1,.3,1);
+  --west:#0066CC;--north:#2a9d8f;--south:#FF6B35;--east:#c9a84c;
+  --rad-sm:6px;--rad-md:8px;--rad-lg:12px;--rad-xl:16px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);--shadow-md:0 4px 16px rgba(0,0,0,.4);
+  --content-w:1200px;--content-n:680px;
 }
-body{background:var(--black);color:var(--white);font-family:'IBM Plex Mono',monospace;min-height:100vh;overflow-x:hidden}
-h1,h2,h3,.display{font-family:'Playfair Display',serif}
-.coord,.mono{font-family:'Space Mono',monospace}
-.layer{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center}
-.layer.active{display:flex}
-.question{font-size:clamp(.85rem,2vw,1.1rem);max-width:640px;margin:0 auto 2.5rem;letter-spacing:.04em;line-height:1.7;opacity:.75}
+[data-theme="light"]{
+  --bg:#f5f2eb;--surface:#faf8f3;--surface2:#fff;--surface-off:#ede9e0;
+  --border:#d8d3c8;--divider:#e4e0d8;
+  --text:#1a1814;--text-m:#6a6860;--text-f:#b0aca4;--text-inv:#f5f2eb;
+  --gold:#a07830;--gold-d:#c9a84c;--gold-g:rgba(160,120,48,.1);--gold-h:#7a5820;
+  --teal:#1a7a6e;--teal-g:rgba(26,122,110,.1);
+  --red:#a83030;--red-g:rgba(168,48,48,.1);
+  --blue:#3a6ab0;--blue-g:rgba(58,106,176,.1);
+  --fire:#d45a2a;--fire-g:rgba(212,90,42,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{min-height:100dvh;font-family:var(--font-b);font-size:16px;color:var(--text);background:var(--bg);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-d);text-wrap:balance;line-height:1.15}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+input,textarea,select{font:inherit;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-md);padding:10px 14px;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
+select option{background:var(--surface);color:var(--text)}
 
-/* COIN STYLES */
-.coins-row{display:flex;gap:3rem;margin-bottom:2rem}
-.coin-container{perspective:600px;cursor:pointer}
-.coin-container:hover .coin-body{box-shadow:0 0 30px rgba(201,168,76,.15)}
-.coin-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;opacity:.6}
-.coin-body{width:140px;height:140px;border-radius:50%;position:relative;transform-style:preserve-3d;transition:transform .1s}
-.coin-body.spinning{transition:none}
-.coin-face{position:absolute;width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;backface-visibility:hidden;border:2px solid}
-.coin-face.front{z-index:2}
-.coin-face.back{transform:rotateY(180deg)}
-.coin-face.red-face{background:rgba(192,40,26,.15);border-color:var(--red);color:var(--red)}
-.coin-face.blue-face{background:rgba(26,63,192,.15);border-color:var(--blue);color:var(--blue)}
-.coin-value{font-family:'Space Mono',monospace;font-size:1.1rem;color:var(--gold)}
+/* ── PROP NAV (cross-site) ── */
+.prop-nav{display:flex;justify-content:center;gap:24px;padding:8px;background:var(--surface);font-family:var(--font-m);font-size:10px;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+.prop-nav a{color:var(--text-f);transition:color var(--tr)}.prop-nav a:hover{color:var(--gold)}.prop-nav a.here{color:var(--teal)}
 
-/* LAYER 1 - THREE SPINS */
-.slots-row{display:flex;gap:2rem;margin-bottom:2rem}
-.slot{width:110px;height:110px;border-radius:50%;border:2px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:.3;transition:all .4s}
-.slot.filled{opacity:1}
-.slot .big-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700}
-.slot .sub-val{font-family:'Space Mono',monospace;font-size:.6rem;opacity:.5}
-.spin-btn{background:none;border:1px solid var(--gold);color:var(--gold);font-family:'IBM Plex Mono',monospace;padding:.6rem 2.5rem;cursor:pointer;letter-spacing:.12em;text-transform:uppercase;font-size:.75rem;transition:all .3s;margin-bottom:1.5rem}
-.spin-btn:hover{background:rgba(201,168,76,.1)}
-.spin-btn:disabled{opacity:.3;cursor:default}
-.pattern-text{font-size:.8rem;color:var(--gold);letter-spacing:.08em;min-height:1.5em}
+/* ── MAIN NAV ── */
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:16px;padding:12px 24px;background:color-mix(in oklab,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-d);font-size:14px;font-weight:600;letter-spacing:.03em;white-space:nowrap}
+.nav-logo:hover{color:var(--gold)}
+.nav-links{display:flex;gap:16px;margin-left:auto;font-size:12px;flex-wrap:wrap}
+.nav-links a{color:var(--text-m);transition:color var(--tr);white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.theme-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--rad-md);color:var(--text-m);flex-shrink:0}
+.theme-btn:hover{color:var(--gold);background:var(--surface)}
 
-/* LAYER 2 - CARDS */
-.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
-.card{width:160px;height:220px;border:1px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .4s;padding:1rem}
-.card:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(201,168,76,.1)}
-.card .card-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700}
-.card .card-fortune{font-size:.55rem;line-height:1.5;margin-top:.75rem;opacity:.6;max-width:130px}
+/* ── LAYOUT ── */
+.app{max-width:var(--content-w);margin:0 auto;padding:0 24px}
+.view{display:none;padding:40px 0 80px}.view.active{display:block}
 
-/* LAYER 2 - DICE */
-.tetra-container{margin-bottom:2rem;cursor:pointer}
-.tetra-face{fill:none;stroke-width:1.5;cursor:pointer;transition:all .3s}
-.tetra-face:hover{fill-opacity:.15}
-.tetra-num{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;pointer-events:none}
+/* ── HERO / COMPASS ── */
+.compass-hero{text-align:center;padding:48px 0 32px}
+.compass-hero h1{font-size:clamp(2rem,1rem+4vw,4.5rem);font-weight:700;margin-bottom:8px}
+.compass-hero h1 span{color:var(--gold)}
+.compass-hero .tagline{font-size:clamp(.9rem,.7rem+.8vw,1.2rem);color:var(--text-m);font-style:italic;font-family:var(--font-d);margin-bottom:8px}
+.compass-hero .sub{font-family:var(--font-m);font-size:11px;color:var(--text-f);letter-spacing:.1em}
 
-/* LAYER 3 */
-.constellation-container{margin-bottom:2rem}
-.constellation-star{fill:currentColor}
-.constellation-line{stroke:currentColor;stroke-width:1;opacity:.4}
-.fortune-full{font-size:.85rem;max-width:500px;line-height:1.7;margin:1.5rem auto;font-style:italic;opacity:.8}
-.coord-display{font-family:'Space Mono',monospace;color:var(--gold);font-size:1rem;letter-spacing:.1em;margin:1rem 0}
+/* ── COMPASS SVG ── */
+.compass-wrap{position:relative;width:min(480px,85vw);height:min(480px,85vw);margin:32px auto}
+.compass-svg{width:100%;height:100%}
+.compass-dir{cursor:pointer;transition:filter var(--tr)}.compass-dir:hover{filter:brightness(1.3)}
 
-.zoom-card{border:1px solid var(--gold);padding:3rem;max-width:360px;margin-bottom:2rem}
-.zoom-card .card-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold)}
-.zoom-card .card-fortune{font-size:.85rem;line-height:1.7;margin-top:1.5rem;opacity:.8}
+/* ── DIRECTION CARDS ── */
+.dir-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:700px;margin:0 auto 48px}
+.dir-card{padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-lg);cursor:pointer;transition:border-color var(--tr),transform var(--tr)}
+.dir-card:hover{transform:translateY(-2px)}
+.dir-card.west{border-left:3px solid var(--west)}.dir-card.west:hover{border-color:var(--west)}
+.dir-card.north{border-left:3px solid var(--north)}.dir-card.north:hover{border-color:var(--north)}
+.dir-card.south{border-left:3px solid var(--south)}.dir-card.south:hover{border-color:var(--south)}
+.dir-card.east{border-left:3px solid var(--east)}.dir-card.east:hover{border-color:var(--east)}
+.dir-card .dc-head{font-family:var(--font-m);font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+.dir-card.west .dc-head{color:var(--west)}.dir-card.north .dc-head{color:var(--north)}
+.dir-card.south .dc-head{color:var(--south)}.dir-card.east .dc-head{color:var(--east)}
+.dir-card .dc-title{font-family:var(--font-d);font-size:18px;margin-bottom:4px}
+.dir-card .dc-desc{font-size:12px;color:var(--text-m);line-height:1.6}
+.dir-card .dc-season{font-family:var(--font-m);font-size:10px;color:var(--text-f);margin-top:8px;letter-spacing:.08em}
 
-.nav-btn{background:none;border:1px solid var(--gold);color:var(--gold);font-family:'IBM Plex Mono',monospace;padding:.6rem 2rem;cursor:pointer;letter-spacing:.1em;font-size:.7rem;text-transform:uppercase;transition:all .3s;margin-top:1rem}
-.nav-btn:hover{background:rgba(201,168,76,.1)}
+/* ── ORACLE ── */
+.oracle-header{text-align:center;padding:48px 0 24px}
+.oracle-header h2{font-size:clamp(1.8rem,1rem+3vw,3rem);margin-bottom:8px}
+.oracle-header .sub{color:var(--text-m);font-family:var(--font-d);font-style:italic}
+.oracle-form{max-width:640px;margin:0 auto 32px;display:flex;flex-direction:column;gap:14px}
+.oracle-form textarea{min-height:90px;resize:vertical;font-size:15px;line-height:1.6}
+.oracle-form .form-row{display:flex;gap:12px;flex-wrap:wrap}
+.oracle-form select{flex:1;min-width:140px}
+.oracle-btn,.btn-gold{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;background:var(--gold);color:var(--text-inv);font-weight:600;border-radius:9999px;font-size:14px;transition:background var(--tr),transform var(--tr)}
+.oracle-btn:hover,.btn-gold:hover{background:var(--gold-h);transform:translateY(-1px)}
 
-/* LAYER 4 - THE FIELD */
-.field-panels{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;width:100%;max-width:1100px}
-.panel{flex:1;min-width:280px;max-width:360px;border:1px solid rgba(237,232,224,.1);padding:1.2rem}
-.panel-title{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:1rem}
-.panel canvas{width:100%!important;max-height:250px}
+/* ── READING OUTPUT ── */
+.reading-card{max-width:700px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-xl);overflow:hidden;animation:fadeUp .5s ease}
+.reading-head{padding:20px 24px;border-bottom:1px solid var(--divider);display:flex;align-items:center;gap:14px}
+.reading-dir-dot{width:12px;height:12px;border-radius:50%}
+.reading-dir-dot.west{background:var(--west)}.reading-dir-dot.north{background:var(--north)}
+.reading-dir-dot.south{background:var(--south)}.reading-dir-dot.east{background:var(--east)}
+.reading-meta .rm-dir{font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.reading-meta .rm-type{font-size:12px;color:var(--text-m)}
+.reading-body{padding:24px}
+.reading-body h3{font-size:1.3rem;margin-bottom:14px;color:var(--gold)}
+.reading-body p,.reading-body .content-block{color:var(--text-m);line-height:1.8;margin-bottom:14px;font-size:14px}
+.reading-body .prompt-block{padding:14px 16px;background:var(--surface2);border-left:3px solid var(--gold);border-radius:0 var(--rad-md) var(--rad-md) 0;margin-top:14px;font-style:italic;color:var(--text-m);font-size:13px}
+.reading-body .seasonal-block{padding:12px 16px;background:var(--teal-g);border:1px solid var(--teal-d);border-radius:var(--rad-md);margin-top:12px;font-size:12px;color:var(--teal)}
+.reading-body .r-block{font-family:var(--font-m);font-size:12px;padding:10px 14px;background:var(--gold-g);border:1px solid var(--gold-d);border-radius:var(--rad-md);margin-top:12px;color:var(--gold)}
 
-.heptagon-panel{display:flex;flex-direction:column;align-items:center}
-.hepta-label{font-size:.7rem;opacity:.5;margin-top:.5rem}
+/* ── EVENT CLOCK ── */
+.clock-header{text-align:center;padding:48px 0 24px}
+.clock-header h2{font-size:clamp(1.8rem,1rem+3vw,3rem);margin-bottom:8px}
+.clock-display{text-align:center;margin-bottom:36px}
+.clock-time{font-family:var(--font-m);font-size:clamp(2rem,1rem+3vw,3.5rem);color:var(--gold);letter-spacing:.08em}
+.clock-date{font-family:var(--font-m);font-size:12px;color:var(--text-m);margin-top:4px}
+.clock-structural{font-family:var(--font-m);font-size:12px;color:var(--text-f);margin-top:8px}
+.timeline{position:relative;max-width:700px;margin:0 auto;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--teal))}
+.tl-ev{position:relative;margin-bottom:24px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.tl-ev::before{content:'';position:absolute;left:-24px;top:22px;width:8px;height:8px;border-radius:50%;border:2px solid var(--gold);background:var(--bg)}
+.tl-ev.sub::before{border-color:var(--red)}.tl-ev.dom::before{border-color:var(--teal)}.tl-ev.str::before{border-color:var(--gold)}
+.tl-meta{display:flex;gap:10px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.tl-year{font-family:var(--font-m);font-size:10px;color:var(--text-f);letter-spacing:.08em}
+.tl-zone{font-family:var(--font-m);font-size:9px;letter-spacing:.1em;padding:2px 6px;border-radius:3px}
+.tl-zone.sub-z{color:var(--red);background:var(--red-g)}.tl-zone.dom-z{color:var(--teal);background:var(--teal-g)}.tl-zone.str-z{color:var(--gold);background:var(--gold-g)}
+.tl-title{font-family:var(--font-d);font-size:1rem;margin-bottom:3px}
+.tl-r{font-family:var(--font-m);font-size:12px;color:var(--gold)}
+.tl-desc{font-size:12px;color:var(--text-m);line-height:1.7;margin-top:6px}
 
-.book-test{border-top:1px solid rgba(237,232,224,.1);padding-top:2rem;margin-top:1rem;max-width:500px;width:100%}
-.book-test h3{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:1rem}
-.book-page{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold);margin:1rem 0}
-.book-zone{font-size:.7rem;opacity:.6;letter-spacing:.05em}
+/* ── CALCULATOR ── */
+.calc-header{text-align:center;padding:48px 0 24px}
+.calc-card{max-width:520px;margin:0 auto 32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-xl);padding:28px}
+.calc-formula{text-align:center;font-family:var(--font-m);font-size:clamp(1.2rem,1rem+1.5vw,2rem);color:var(--gold);margin-bottom:20px;padding:14px;background:var(--gold-g);border:1px solid var(--gold-d);border-radius:10px}
+.calc-inputs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.calc-field label{display:block;font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:var(--text-m);margin-bottom:4px;text-transform:uppercase}
+.calc-field input{font-size:18px;text-align:center;font-family:var(--font-m)}
+.calc-result{text-align:center;padding:20px;background:var(--surface2);border-radius:10px;border:1px solid var(--divider)}
+.calc-r-val{font-family:var(--font-m);font-size:clamp(1.8rem,1rem+2.5vw,3rem);font-weight:700;margin-bottom:6px}
+.calc-zone-label{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;padding:3px 10px;border-radius:3px;display:inline-block}
+.calc-bar{height:10px;background:var(--surface-off);border-radius:5px;margin-top:14px;overflow:hidden;position:relative}
+.calc-bar-fill{height:100%;border-radius:5px;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.calc-bar-mark{position:absolute;top:-3px;width:2px;height:16px;background:var(--text-f);border-radius:1px;transition:left .6s}
+.calc-context{max-width:520px;margin:0 auto;font-size:12px;color:var(--text-m);line-height:1.8;text-align:center}
 
-.stats-row{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;font-size:.7rem;letter-spacing:.08em;opacity:.6}
-.stat span{color:var(--gold)}
+/* ── SEASONAL VIEW ── */
+.season-header{text-align:center;padding:48px 0 24px}
+.season-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.season-tab{padding:8px 20px;border:1px solid var(--border);border-radius:9999px;font-family:var(--font-m);font-size:11px;letter-spacing:.08em;color:var(--text-m);transition:all var(--tr)}
+.season-tab:hover,.season-tab.active{border-color:var(--gold);color:var(--gold);background:var(--gold-g)}
+.season-content{max-width:700px;margin:0 auto}
+.season-content h3{font-size:1.4rem;margin-bottom:12px}
+.season-content .spirit-guide{font-family:var(--font-m);font-size:11px;color:var(--gold);letter-spacing:.08em;margin-bottom:16px}
+.season-content .vibe{font-size:14px;color:var(--text-m);line-height:1.8;margin-bottom:16px}
+.season-content .astro{font-size:12px;color:var(--text-f);line-height:1.7;margin-bottom:12px}
+.season-content .tarot-info{padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-md);font-size:12px;color:var(--text-m);margin-bottom:12px}
+.season-content .produce-list{font-size:12px;color:var(--text-m);line-height:1.8;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-md)}
+.season-content .albums{font-size:11px;color:var(--text-f);line-height:1.8;margin-top:12px}
 
-.restart-btn{background:none;border:1px solid rgba(237,232,224,.2);color:var(--white);font-family:'IBM Plex Mono',monospace;padding:.75rem 2rem;cursor:pointer;letter-spacing:.12em;text-transform:uppercase;font-size:.65rem;margin-top:2rem;transition:all .3s}
-.restart-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* ── ENGINE (35-domain compute) ── */
+.engine-header{text-align:center;padding:48px 0 24px}
+.engine-tabs{display:flex;border-bottom:1px solid var(--border);font-family:var(--font-m);font-size:12px;margin-bottom:24px;flex-wrap:wrap}
+.engine-tab{padding:12px 20px;cursor:pointer;color:var(--text-m);border-bottom:2px solid transparent;transition:all var(--tr)}
+.engine-tab:hover{color:var(--text)}.engine-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.engine-panel{display:none;max-width:1000px;margin:0 auto}.engine-panel.active{display:block}
+.compute-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.input-group{margin-bottom:14px}
+.input-group label{display:block;font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.input-group input,.input-group select{font-family:var(--font-m);font-size:14px}
+.btn-engine{padding:12px 24px;font-family:var(--font-m);font-size:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;border-radius:var(--rad-sm);transition:all var(--tr);letter-spacing:.05em;width:100%;margin-top:8px}
+.btn-engine:hover{background:var(--gold);color:var(--text-inv)}
+.btn-engine.secondary{border-color:var(--teal);color:var(--teal)}.btn-engine.secondary:hover{background:var(--teal);color:var(--text-inv)}
+.result-card-e{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-md);padding:28px;display:none}
+.result-card-e.show{display:block}
+.result-header-e{text-align:center;margin-bottom:20px}
+.result-ratio-e{font-family:var(--font-m);font-size:clamp(2rem,1rem+3vw,3rem);font-weight:400;margin-bottom:4px}
+.result-zone-e{font-family:var(--font-m);font-size:12px;letter-spacing:.15em;padding:6px 16px;display:inline-block;border-radius:3px}
+.zone-SUBORDINATED{background:var(--red-g);color:var(--red);border:1px solid var(--red-d)}
+.zone-STRUCTURAL{background:var(--teal-g);color:var(--teal);border:1px solid var(--teal-d)}
+.zone-DOMINANT{background:var(--gold-g);color:var(--gold);border:1px solid var(--gold-d)}
+.result-detail-e{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.result-detail-e .item{padding:10px;background:var(--surface2);border-radius:var(--rad-sm)}
+.result-detail-e .item .k{font-family:var(--font-m);font-size:10px;color:var(--teal);letter-spacing:.1em;text-transform:uppercase}
+.result-detail-e .item .v{font-family:var(--font-m);font-size:13px;color:var(--text);margin-top:4px}
+.event-json{background:var(--bg);border:1px solid var(--border);border-radius:var(--rad-sm);padding:14px;margin-top:14px;font-family:var(--font-m);font-size:11px;color:var(--text-m);max-height:300px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;display:none}
+.domain-table{width:100%;border-collapse:collapse;font-size:13px}
+.domain-table th{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);padding:10px 8px;text-align:left;border-bottom:1px solid var(--border)}
+.domain-table td{padding:8px;border-bottom:1px solid var(--border)}
+.domain-table tr{cursor:pointer;transition:background var(--tr)}.domain-table tr:hover{background:var(--surface2)}
+.domain-badge{font-family:var(--font-m);font-size:10px;padding:2px 6px;border-radius:3px;letter-spacing:.05em}
+.event-list-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-md);padding:16px;margin-bottom:12px}
+.event-list-item pre{font-family:var(--font-m);font-size:10px;color:var(--text-m);max-height:180px;overflow:auto;white-space:pre-wrap}
 
-.red-border{border-color:var(--red)}.blue-border{border-color:var(--blue)}
-.red-text{color:var(--red)}.blue-text{color:var(--blue)}.gold-text{color:var(--gold)}
+/* ── TICKER ── */
+.ticker-wrap{overflow:hidden;background:var(--surface);border-bottom:1px solid var(--border);padding:10px 0;white-space:nowrap;font-family:var(--font-m);font-size:11px;color:var(--text-f);letter-spacing:.05em}
+.ticker-track{display:inline-block;animation:tickScroll 40s linear infinite}
+.ticker-track span{padding:0 10px}
+@keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeIn .6s ease forwards}
+/* ── FRAMEWORK SECTION ── */
+.section{padding:80px 24px}
+.section-inner{max-width:var(--content-w);margin:0 auto}
+.section-label{font-family:var(--font-m);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.section-heading{font-size:clamp(1.8rem,1rem+3vw,3rem);margin-bottom:16px}
+.section-intro{font-size:clamp(.9rem,.8rem+.5vw,1.1rem);color:var(--text-m);line-height:1.8;max-width:700px;margin-bottom:40px}
+.formula-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad-xl);padding:32px;margin-bottom:40px;text-align:center}
+.formula-display{font-family:var(--font-m);font-size:clamp(1.5rem,1rem+2vw,2.5rem);color:var(--gold);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}
+.fc-fraction{display:flex;flex-direction:column;align-items:center;gap:2px}.fc-line{width:100%;height:2px;background:var(--gold)}
+.formula-vars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;font-size:12px;color:var(--text-m)}
+.fv-item{text-align:center}.fv-var{font-family:var(--font-m);color:var(--gold);font-weight:600;display:block;margin-bottom:4px}
+.zones-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.zone-card{padding:20px;border-radius:var(--rad-lg);border:1px solid var(--border)}
+.zc-sub{background:var(--red-g);border-color:var(--red-d)}.zc-str{background:var(--teal-g);border-color:var(--teal-d)}.zc-dom{background:var(--gold-g);border-color:var(--gold-d)}
+.zc-badge{font-family:var(--font-m);font-size:10px;letter-spacing:.12em;margin-bottom:4px}
+.zc-sub .zc-badge{color:var(--red)}.zc-str .zc-badge{color:var(--teal)}.zc-dom .zc-badge{color:var(--gold)}
+.zc-range{font-family:var(--font-m);font-size:12px;color:var(--text-f);margin-bottom:10px}
+.zone-card p{font-size:13px;color:var(--text-m);line-height:1.7;margin-bottom:8px}
+.zc-examples{font-family:var(--font-m);font-size:10px;color:var(--text-f)}
+.attractor-note{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--gold-g);border:1px solid var(--gold-d);border-radius:var(--rad-lg)}
+.an-icon{font-size:24px;color:var(--gold);flex-shrink:0}
+.an-text{font-size:13px;color:var(--text-m);line-height:1.7}.an-text strong{color:var(--gold)}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--border);padding:20px 24px;margin-top:40px}
+.footer-inner{max-width:var(--content-w);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:10px;color:var(--text-f);font-family:var(--font-m)}
+.footer-inner a{color:var(--teal)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.fade-in{animation:fadeUp .5s ease}
+
+@media(max-width:768px){
+  .nav-links{display:none}.dir-cards{grid-template-columns:1fr}
+  .calc-inputs{grid-template-columns:1fr}.form-row{flex-direction:column}
+  .compute-grid{grid-template-columns:1fr}.zones-grid{grid-template-columns:1fr}
+  .formula-vars{grid-template-columns:1fr}.result-detail-e{grid-template-columns:1fr}
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle{display:none;width:36px;height:36px;border-radius:var(--rad-md);align-items:center;justify-content:center;color:var(--text-m)}
+@media(max-width:768px){.nav-toggle{display:flex}.nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 24px;gap:12px}}
 </style>
 </head>
 <body>
 
-<!-- LAYER 0 — THE COIN -->
-<div id="layer0" class="layer active">
-  <p class="question">"What, exactly, is being measured when a system appears to produce randomness?"</p>
-  <div class="coins-row">
-    <div class="coin-container" onclick="flipCoin('left')">
-      <div class="coin-label" id="leftLabel">Horizontal — X</div>
-      <div class="coin-body" id="leftCoin">
-        <div class="coin-face front red-face" id="leftFront">X</div>
-        <div class="coin-face back blue-face" id="leftBack">X</div>
+<!-- PROP NAV -->
+<div class="prop-nav">
+  <a href="https://heyerlivin.com">.com</a>
+  <a href="https://heyerlivin.shop">.shop</a>
+  <a class="here" href="#">.space</a>
+  <a href="https://heyerlivin.store">.store</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo" onclick="showView('compass')">
+    <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M18 4L18 32" stroke="var(--gold)" stroke-width="1.5"/>
+      <path d="M4 18L32 18" stroke="var(--gold)" stroke-width="1.5"/>
+      <circle cx="18" cy="18" r="4" fill="var(--gold)"/>
+      <path d="M10 10L26 26" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3" opacity=".5"/>
+      <path d="M26 10L10 26" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3" opacity=".5"/>
+    </svg>
+    <span>Heyer Livin'</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <div class="nav-links">
+    <a href="#" onclick="showView('compass')" class="active" id="nav-compass">Compass</a>
+    <a href="#" onclick="showView('oracle')" id="nav-oracle">Oracle</a>
+    <a href="#" onclick="showView('seasonal')" id="nav-seasonal">Seasons</a>
+    <a href="#" onclick="showView('clock')" id="nav-clock">Event Clock</a>
+    <a href="#" onclick="showView('framework')" id="nav-framework">Framework</a>
+    <a href="#" onclick="showView('engine')" id="nav-engine">Engine</a>
+    <a href="#" onclick="showView('calc')" id="nav-calc">R Calc</a>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+    <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span>Columbus 1492 · R=0.00</span><span>·</span>
+    <span>Thomas Paine 1776 · R=0.09</span><span>·</span>
+    <span>Lowell Mills 1840s · R=0.53</span><span>·</span>
+    <span>Women's Unpaid Labor · R=0.007</span><span>·</span>
+    <span>EDD 2020 · R=0.04</span><span>·</span>
+    <span>Jordan FY2018 · R=0.09</span><span>·</span>
+    <span>Jordan $100M · R=0.87</span><span>·</span>
+    <span>Wicked "Wonderful" · R=0.27</span><span>·</span>
+    <span>Laura Fernández 2026 · R=0.65</span><span>·</span>
+    <span>Target DEI 2025 · R=0.68</span><span>·</span>
+    <span>X̄ = 0.390992 · σ = 0.019778</span><span>·</span>
+    <span>Columbus 1492 · R=0.00</span><span>·</span>
+    <span>Thomas Paine 1776 · R=0.09</span><span>·</span>
+    <span>Lowell Mills 1840s · R=0.53</span><span>·</span>
+    <span>Women's Unpaid Labor · R=0.007</span><span>·</span>
+    <span>EDD 2020 · R=0.04</span><span>·</span>
+    <span>Jordan FY2018 · R=0.09</span><span>·</span>
+    <span>Jordan $100M · R=0.87</span><span>·</span>
+    <span>Wicked "Wonderful" · R=0.27</span><span>·</span>
+    <span>Laura Fernández 2026 · R=0.65</span><span>·</span>
+    <span>Target DEI 2025 · R=0.68</span><span>·</span>
+    <span>X̄ = 0.390992 · σ = 0.019778</span>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- ════════ COMPASS VIEW ════════ -->
+<div class="view active" id="view-compass">
+  <div class="compass-hero">
+    <h1>Cultural <span>Compass</span></h1>
+    <p class="tagline">Intention + Culture = Design</p>
+    <p class="sub">R = x / (x + y²) · X̄ = 0.390992 · σ = 0.019778 · ε = √2−1 · Patent Pending April 2026</p>
+  </div>
+
+  <div class="compass-wrap">
+    <svg class="compass-svg" viewBox="0 0 480 480" fill="none">
+      <circle cx="240" cy="240" r="220" stroke="var(--border)" stroke-width="1.5" fill="none"/>
+      <circle cx="240" cy="240" r="180" stroke="var(--border)" stroke-width="1" fill="none" stroke-dasharray="4 6" opacity=".3"/>
+      <circle cx="240" cy="240" r="140" stroke="var(--border)" stroke-width="1" fill="none" stroke-dasharray="2 4" opacity=".2"/>
+      <line x1="240" y1="20" x2="240" y2="460" stroke="var(--border)" stroke-width=".5" opacity=".25"/>
+      <line x1="20" y1="240" x2="460" y2="240" stroke="var(--border)" stroke-width=".5" opacity=".25"/>
+      <g class="compass-dir" onclick="openDirection('north')">
+        <polygon points="240,28 265,110 215,110" fill="var(--north)" opacity=".8"/>
+        <polygon points="240,28 252,82 228,82" fill="var(--north)"/>
+        <text x="240" y="138" text-anchor="middle" font-family="var(--font-m)" font-size="10" letter-spacing=".12em" fill="var(--north)">NORTH</text>
+        <text x="240" y="150" text-anchor="middle" font-family="var(--font-m)" font-size="8" fill="var(--text-f)" letter-spacing=".1em">EARTH · PENTACLES</text>
+      </g>
+      <g class="compass-dir" onclick="openDirection('south')">
+        <polygon points="240,452 215,370 265,370" fill="var(--south)" opacity=".8"/>
+        <polygon points="240,452 228,398 252,398" fill="var(--south)"/>
+        <text x="240" y="356" text-anchor="middle" font-family="var(--font-m)" font-size="10" letter-spacing=".12em" fill="var(--south)">SOUTH</text>
+        <text x="240" y="344" text-anchor="middle" font-family="var(--font-m)" font-size="8" fill="var(--text-f)" letter-spacing=".1em">FIRE · WANDS</text>
+      </g>
+      <g class="compass-dir" onclick="openDirection('west')">
+        <polygon points="28,240 110,215 110,265" fill="var(--west)" opacity=".8"/>
+        <polygon points="28,240 82,228 82,252" fill="var(--west)"/>
+        <text x="138" y="244" text-anchor="middle" font-family="var(--font-m)" font-size="10" letter-spacing=".12em" fill="var(--west)">WEST</text>
+        <text x="138" y="256" text-anchor="middle" font-family="var(--font-m)" font-size="8" fill="var(--text-f)" letter-spacing=".1em">WATER · EYES</text>
+      </g>
+      <g class="compass-dir" onclick="openDirection('east')">
+        <polygon points="452,240 370,265 370,215" fill="var(--east)" opacity=".8"/>
+        <polygon points="452,240 398,252 398,228" fill="var(--east)"/>
+        <text x="342" y="244" text-anchor="middle" font-family="var(--font-m)" font-size="10" letter-spacing=".12em" fill="var(--east)">EAST</text>
+        <text x="342" y="256" text-anchor="middle" font-family="var(--font-m)" font-size="8" fill="var(--text-f)" letter-spacing=".1em">AIR · SWORDS</text>
+      </g>
+      <g class="compass-dir" onclick="showView('oracle')" style="cursor:pointer">
+        <circle cx="240" cy="240" r="40" fill="var(--surface)" stroke="var(--gold)" stroke-width="2"/>
+        <circle cx="240" cy="240" r="28" fill="var(--bg)" stroke="var(--gold-d)" stroke-width="1"/>
+        <text x="240" y="236" text-anchor="middle" font-family="var(--font-m)" font-size="10" letter-spacing=".08em" fill="var(--gold)">R = 0.39</text>
+        <text x="240" y="250" text-anchor="middle" font-family="var(--font-m)" font-size="7" fill="var(--text-f)">ASK THE ORACLE</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="dir-cards">
+    <div class="dir-card west" onclick="openDirection('west')">
+      <div class="dc-head">WEST — Water / Eyes (Cups)</div>
+      <div class="dc-title">Meaning & Emotion</div>
+      <div class="dc-desc">Where meaning flows unbounded by control or reason. Emotions, relationships, the felt life. Journal prompts. Spiritual readings. The interior world.</div>
+      <div class="dc-season">Fall — Fallin' In or Out? · Whiskey as Motha Fall · Root Chakra</div>
+    </div>
+    <div class="dir-card north" onclick="openDirection('north')">
+      <div class="dc-head">NORTH — Earth / Pentacles</div>
+      <div class="dc-title">Structure & Economy</div>
+      <div class="dc-desc">Financial constraint, market analysis, economic decisions. R = x/(x+y²) applied to material conditions. The structural weight of the world measured.</div>
+      <div class="dc-season">Winter — Baby, It's Cold Outside · The Sacred Trio · Third Eye + Crown</div>
+    </div>
+    <div class="dir-card south" onclick="openDirection('south')">
+      <div class="dc-head">SOUTH — Fire / Wands (Trees)</div>
+      <div class="dc-title">Creation & The Erased</div>
+      <div class="dc-desc">Design, creativity, rebirth. The erased made visible. Cultural artifacts. The fire that burns through what was hidden and builds from what remains.</div>
+      <div class="dc-season">Summer — Sun-Melanated Magic · Tequila the Sun Queen · Solar Plexus</div>
+    </div>
+    <div class="dir-card east" onclick="openDirection('east')">
+      <div class="dc-head">EAST — Air / Swords</div>
+      <div class="dc-title">Wisdom & Transmission</div>
+      <div class="dc-desc">Soul, spirit, ancestral reasoning. Critical analysis. The transmission of knowledge across generations. The oldest technology in human history.</div>
+      <div class="dc-season">Spring — Tip Toe Thru' the Tulips · Gin the Blooming Trickster · Heart Chakra</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ ORACLE VIEW ════════ -->
+<div class="view" id="view-oracle">
+  <div class="oracle-header">
+    <h2>The Oracle</h2>
+    <p class="sub">Choice Is Not Chance. Neither Is Silence.</p>
+  </div>
+  <div class="oracle-form">
+    <textarea id="oracle-q" placeholder="What weighs on you? A question, a situation, a name, a number, a memory..."></textarea>
+    <div class="form-row">
+      <select id="oracle-type">
+        <option value="auto">Auto-detect</option>
+        <option value="reading">Spiritual Reading</option>
+        <option value="journal">Journal Prompt</option>
+        <option value="seasonal">Seasonal Guide</option>
+        <option value="analysis">Critical Analysis</option>
+      </select>
+      <select id="oracle-dir">
+        <option value="auto">Let the compass choose</option>
+        <option value="west">West — Water / Eyes</option>
+        <option value="north">North — Earth / Pentacles</option>
+        <option value="south">South — Fire / Wands</option>
+        <option value="east">East — Air / Swords</option>
+      </select>
+    </div>
+    <button class="oracle-btn" onclick="castReading()">Cast the Compass</button>
+  </div>
+  <div id="oracle-result"></div>
+</div>
+
+<!-- ════════ SEASONAL VIEW ════════ -->
+<div class="view" id="view-seasonal">
+  <div class="season-header">
+    <h2>The Rhythm of the Seasons</h2>
+    <p style="color:var(--text-m);font-family:var(--font-d);font-style:italic;margin-top:8px">Each season guided by a spirit that personifies the energy of that time of year.</p>
+  </div>
+  <div class="season-tabs">
+    <button class="season-tab active" onclick="showSeason('spring')">Spring</button>
+    <button class="season-tab" onclick="showSeason('summer')">Summer</button>
+    <button class="season-tab" onclick="showSeason('fall')">Fall</button>
+    <button class="season-tab" onclick="showSeason('winter')">Winter</button>
+  </div>
+  <div class="season-content" id="season-content"></div>
+</div>
+
+<!-- ════════ EVENT CLOCK VIEW ════════ -->
+<div class="view" id="view-clock">
+  <div class="clock-header">
+    <h2>The Event Clock</h2>
+    <p style="color:var(--text-m);font-family:var(--font-d);font-style:italic;margin-top:8px">A live record of what is and what is known.</p>
+  </div>
+  <div class="clock-display">
+    <div class="clock-time" id="live-clock">00:00:00</div>
+    <div class="clock-date" id="live-date"></div>
+    <div class="clock-structural" id="days-since"></div>
+  </div>
+  <div class="timeline" id="timeline-container"></div>
+</div>
+
+<!-- ════════ FRAMEWORK VIEW ════════ -->
+<div class="view" id="view-framework">
+  <div class="section-inner">
+    <div class="section-label">The Framework</div>
+    <h2 class="section-heading">One ruler for every system.</h2>
+    <p class="section-intro">Existing statistical tests tell you <em>if</em> a distribution is non-random. This tells you <em>how much</em> structural force is shaping it — and it works the same way whether you're measuring a labor market, a parliament, a health system, or cultural knowledge loss.</p>
+    <div class="formula-card">
+      <div class="formula-display">
+        <span style="color:var(--gold)">R</span>
+        <span>=</span>
+        <div class="fc-fraction">
+          <div>x</div>
+          <div class="fc-line"></div>
+          <div>x + y²</div>
+        </div>
       </div>
-      <div class="coin-value" id="leftValue">&nbsp;</div>
-    </div>
-    <div class="coin-container" onclick="flipCoin('right')">
-      <div class="coin-label" id="rightLabel">Vertical — Y</div>
-      <div class="coin-body" id="rightCoin">
-        <div class="coin-face front blue-face" id="rightFront">Y</div>
-        <div class="coin-face back red-face" id="rightBack">Y</div>
+      <div class="formula-vars">
+        <div class="fv-item"><span class="fv-var">x</span><span>The constrained group's access, share, or representation</span></div>
+        <div class="fv-item"><span class="fv-var">y</span><span>The dominant group's share or hold</span></div>
+        <div class="fv-item"><span class="fv-var">R</span><span>The structural constraint ratio — always between 0 and 1</span></div>
       </div>
-      <div class="coin-value" id="rightValue">&nbsp;</div>
+    </div>
+    <div class="zones-grid">
+      <div class="zone-card zc-sub">
+        <div class="zc-badge">SUBORDINATED</div>
+        <div class="zc-range">R &lt; 0.30</div>
+        <p>The constraint is total. The ratio barely registers. Not poverty — structural erasure. The fight hasn't started yet, or it was suppressed before it did.</p>
+        <div class="zc-examples">Women's health R&D (R=0.05) · Gold Myth 1492 (R=0.00) · AI literacy gap (R=0.24)</div>
+      </div>
+      <div class="zone-card zc-str">
+        <div class="zc-badge">STRUCTURAL</div>
+        <div class="zc-range">R ≈ 0.30–0.50</div>
+        <p>The convergence band. The fight is live. This is where movements begin, pamphlets circulate, women strike, communities boycott. The constraint is enforced but contestable.</p>
+        <div class="zc-examples">Women in parliament (R=0.33) · Rural mental health (R=0.32) · Thomas Paine's era (R→0.39)</div>
+      </div>
+      <div class="zone-card zc-dom">
+        <div class="zc-badge">DOMINANT</div>
+        <div class="zc-range">R ≥ 0.50</div>
+        <p>The constraint broke, or the constrained group found their floor. The dominant system starts losing revenue, votes, or legitimacy. Corrections here are often violent and fast.</p>
+        <div class="zc-examples">Target boycott (R=0.68) · Laura Fernández (R=0.65) · Jordan $100M (R=0.87)</div>
+      </div>
+    </div>
+    <div class="attractor-note">
+      <div class="an-icon">◈</div>
+      <div class="an-text">
+        <strong>The 0.39 Attractor</strong> — The STRUCTURAL zone clusters near R ≈ 0.39 across every domain analyzed. 12 datasets, centuries apart, converge to X̄ = 0.390992, σ = 0.019778. This is the mathematical fingerprint of enforced equilibrium: enough access to maintain participation in the system, not enough to change it. The attractor is not a coincidence. It is a gravitational characteristic introduced by 3,000 years of religion, politics, and preference.
+      </div>
     </div>
   </div>
-  <p class="pattern-text" id="coinHint">tap a coin to begin</p>
 </div>
 
-<!-- LAYER 1 — THREE SPINS -->
-<div id="layer1" class="layer">
-  <h2 class="display" style="margin-bottom:.5rem;font-size:1.3rem">Three Spins</h2>
-  <p class="question" style="margin-bottom:1.5rem">Each spin is independent. The pattern determines your path.</p>
-  <div class="slots-row">
-    <div class="slot" id="slot0"><span class="big-num">—</span><span class="sub-val">&nbsp;</span></div>
-    <div class="slot" id="slot1"><span class="big-num">—</span><span class="sub-val">&nbsp;</span></div>
-    <div class="slot" id="slot2"><span class="big-num">—</span><span class="sub-val">&nbsp;</span></div>
+<!-- ════════ ENGINE VIEW (35-Domain Compute) ════════ -->
+<div class="view" id="view-engine">
+  <div class="engine-header">
+    <h2>TRANSMISSION Engine</h2>
+    <p style="color:var(--text-m);font-family:var(--font-d);font-style:italic;margin-top:8px">Compute R, classify zones, generate schema-validated event records. 35 domains preloaded.</p>
   </div>
-  <button class="spin-btn" id="spinBtn" onclick="doSpin()">Spin</button>
-  <p class="pattern-text" id="patternText">&nbsp;</p>
-</div>
-
-<!-- LAYER 2A — RED PATH: 4 CARDS -->
-<div id="layer2cards" class="layer">
-  <h2 class="display" style="margin-bottom:.5rem;font-size:1.3rem">Four Coordinates</h2>
-  <p class="question" style="margin-bottom:1.5rem">Choose one card. It holds your Y coordinate.</p>
-  <div class="cards-grid" id="cardsGrid"></div>
-</div>
-
-<!-- LAYER 2B — BLUE PATH: TRIANGLE DICE -->
-<div id="layer2dice" class="layer">
-  <h2 class="display" style="margin-bottom:.5rem;font-size:1.3rem">Triangle Dice</h2>
-  <p class="question" style="margin-bottom:1.5rem">Four faces. Choose one.</p>
-  <div class="tetra-container" id="tetraContainer"></div>
-</div>
-
-<!-- LAYER 3A — BLUE: CONSTELLATION -->
-<div id="layer3constellation" class="layer">
-  <div class="constellation-container" id="constellationSvg"></div>
-  <h2 class="display" id="constellationName" style="font-size:1.5rem"></h2>
-  <p class="fortune-full" id="constellationFortune"></p>
-  <p class="coord-display" id="constellationCoord"></p>
-  <button class="nav-btn" onclick="goToField()">View the field →</button>
-</div>
-
-<!-- LAYER 3B — RED: ZOOM CARD -->
-<div id="layer3zoom" class="layer">
-  <div class="zoom-card fade-in">
-    <div class="card-num" id="zoomNum"></div>
-    <div class="card-fortune" id="zoomFortune"></div>
+  <div class="engine-tabs">
+    <div class="engine-tab active" onclick="showEnginePanel('e-compute')">Compute</div>
+    <div class="engine-tab" onclick="showEnginePanel('e-domains')">35 Domains</div>
+    <div class="engine-tab" onclick="showEnginePanel('e-records')">Records</div>
   </div>
-  <p class="coord-display" id="zoomCoord"></p>
-  <p class="mono" style="font-size:.65rem;opacity:.4;letter-spacing:.1em">coordinate confirmed</p>
-  <button class="nav-btn" onclick="goToField()">View the field →</button>
-</div>
 
-<!-- LAYER 4 — THE FIELD -->
-<div id="layer4" class="layer">
-  <h2 class="display" style="font-size:1.5rem;margin-bottom:2rem">The Field</h2>
-  <div class="field-panels">
-    <div class="panel">
-      <div class="panel-title">Live Line Graph — Red vs Blue</div>
-      <canvas id="lineChart"></canvas>
-    </div>
-    <div class="panel heptagon-panel">
-      <div class="panel-title">Seven-Sided Clock</div>
-      <svg id="heptagonSvg" width="220" height="220" viewBox="0 0 220 220"></svg>
-      <div class="hepta-label" id="heptaLabel">Session 0</div>
-      <div class="coord-display" id="heptaCoord" style="font-size:.75rem"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">DNA Scatter Plot</div>
-      <canvas id="scatterChart"></canvas>
+  <div class="engine-panel active" id="e-compute">
+    <div class="compute-grid">
+      <div>
+        <div class="input-group">
+          <label>Domain</label>
+          <select id="inp-domain" onchange="prefill()">
+            <option value="">— Custom —</option>
+            <option value="femtech">Women's Health / FemTech</option>
+            <option value="ai_literacy">AI Literacy / Lower-Income Workers</option>
+            <option value="higher_ed">Higher Education Access</option>
+            <option value="oral_tradition">Oral Tradition / Cultural Transmission</option>
+            <option value="political_rep">Women in Political Representation</option>
+            <option value="mental_health">Mental Health Peer Support</option>
+            <option value="repro_autonomy">Reproductive Autonomy / Labor Economics</option>
+            <option value="gig_economy">Gig Economy / Platform Labor</option>
+            <option value="loneliness">Loneliness / Social Belonging</option>
+            <option value="family_planning">Family Planning Access (Global South)</option>
+            <option value="hims_womens">HIMS Women's Health R&D Share</option>
+            <option value="hims_telehealth">HIMS Telehealth Access Equity</option>
+            <option value="hims_penetration">HIMS Subscriber Market Penetration</option>
+          </select>
+        </div>
+        <div class="input-group"><label>x (constrained partition)</label><input type="number" id="inp-x" step="any" placeholder="e.g. 0.05"/></div>
+        <div class="input-group"><label>x description</label><input type="text" id="inp-x-desc" placeholder="e.g. 5% R&D funding share"/></div>
+        <div class="input-group"><label>y (dominant partition)</label><input type="number" id="inp-y" step="any" placeholder="e.g. 0.95"/></div>
+        <div class="input-group"><label>y description</label><input type="text" id="inp-y-desc" placeholder="e.g. 95% default allocation"/></div>
+        <div class="input-group"><label>Source identifier</label><input type="text" id="inp-source" placeholder="e.g. WHO-2025-report"/></div>
+        <button class="btn-engine" onclick="engineCompute()">COMPUTE R</button>
+        <button class="btn-engine secondary" onclick="exportRecord()">EXPORT EVENT RECORD</button>
+      </div>
+      <div>
+        <div class="result-card-e" id="e-result">
+          <div class="result-header-e">
+            <div class="result-ratio-e" id="e-ratio">—</div>
+            <div class="result-zone-e" id="e-zone">—</div>
+          </div>
+          <div class="result-detail-e">
+            <div class="item"><div class="k">Formula</div><div class="v" id="e-formula">—</div></div>
+            <div class="item"><div class="k">Zone</div><div class="v" id="e-zone-text">—</div></div>
+            <div class="item"><div class="k">Distance from 0.39</div><div class="v" id="e-distance">—</div></div>
+            <div class="item"><div class="k">Inside Band</div><div class="v" id="e-band">—</div></div>
+          </div>
+          <div class="event-json" id="e-json"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="book-test">
-    <h3>5,000 pages. The book falls open.</h3>
-    <button class="spin-btn" id="bookBtn" onclick="openBook()">Open the book</button>
-    <div class="book-page" id="bookPage">&nbsp;</div>
-    <div class="book-zone" id="bookZone">&nbsp;</div>
+  <div class="engine-panel" id="e-domains">
+    <table class="domain-table">
+      <thead><tr><th>Domain</th><th>x</th><th>y</th><th>R</th><th>Zone</th><th>Path</th></tr></thead>
+      <tbody id="domain-tbody"></tbody>
+    </table>
   </div>
 
-  <div class="stats-row">
-    <div class="stat">Red sessions: <span id="statRed">0</span></div>
-    <div class="stat">Blue sessions: <span id="statBlue">0</span></div>
-    <div class="stat">Total plots: <span id="statPlots">0</span></div>
-    <div class="stat">Total sessions: <span id="statSessions">0</span></div>
+  <div class="engine-panel" id="e-records">
+    <div id="engine-event-list"><p style="color:var(--text-m)">No event records yet. Use the Compute tab to generate records.</p></div>
+    <button class="btn-engine" onclick="exportAll()" style="max-width:300px;margin-top:16px">EXPORT ALL RECORDS</button>
   </div>
-
-  <button class="restart-btn" onclick="restartSession()">New session — sides swap</button>
 </div>
+
+<!-- ════════ CALCULATOR VIEW ════════ -->
+<div class="view" id="view-calc">
+  <div class="calc-header">
+    <h2>The Universal Ruler</h2>
+    <p style="color:var(--text-m);font-family:var(--font-d);font-style:italic;margin-top:8px">One formula. Every domain. 534 years.</p>
+  </div>
+  <div class="calc-card">
+    <div class="calc-formula">R = x / (x + y²)</div>
+    <div class="calc-inputs">
+      <div class="calc-field"><label>x — constrained share</label><input type="number" id="calc-x" value="5" step="any" min="0" oninput="calculate()"/></div>
+      <div class="calc-field"><label>y — dominant share</label><input type="number" id="calc-y" value="95" step="any" min="0" oninput="calculate()"/></div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-r-val" id="calc-r-val">—</div>
+      <div class="calc-zone-label" id="calc-zone-label">—</div>
+      <div class="calc-bar">
+        <div class="calc-bar-fill" id="calc-bar-fill" style="width:0%"></div>
+        <div class="calc-bar-mark" id="calc-bar-mark" style="left:39%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="calc-context" id="calc-context"></div>
+</div>
+
+</div><!-- end .app -->
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 Heyer Livin' LLC — All Rights Reserved</span>
+    <span>R = x / (x + y²) · Patent Pending</span>
+    <span>Jair Valley · Intention + Culture = Design</span>
+    <span>
+      <a href="https://heyerlivin.com">heyerlivin.com</a> ·
+      <a href="https://heyerlivin.shop">heyerlivin.shop</a> ·
+      <a href="https://glyphhrlvn4culturalnav.space">glyphhrlvn4culturalnav.space</a>
+    </span>
+  </div>
+</footer>
 
 <script>
-// ═══════════════════════════════════════════
-// DATA PERSISTENCE
-// ═══════════════════════════════════════════
-const STORAGE_KEY = 'hl_sim_data';
-const FORTUNES = [
-  "The floor does not move. The ceiling does not move. Everything in between does.",
-  "You did not solve for whether it would happen. You solved for why it already did.",
-  "Intention + Culture = Design. Chance is not choice.",
-  "The compass reads the field honestly from any position without choosing direction.",
-  "Existence is certain. The meeting is the variable.",
-  "The number is the glyph. The glyph is the proof.",
-  "What systems call chance is the recurring execution of a prior structural choice.",
-  "The simulation does not produce a result. It produces a coordinate.",
-  "Two of three samples confirm the event is near-certain. The third is what makes it interesting.",
-  "The room is the collapse point.",
-  "The pattern itself — not any individual — is the co-founding intelligence.",
-  "P(encounter | existence) ≠ P(encounter).",
-  "The graph does not stabilize. It documents independent agents producing a shared coordinate.",
-  "What is excluded before the record begins is not a gap. It is a design decision.",
-  "Erasure codes as zero — not absence but presence recorded as peripheral.",
-  "Once existence is confirmed at P = 1, the denominator changes.",
-  "The rupture holds the position even when the order does not.",
-  "The researcher must be indistinguishable from the population to measure the field accurately.",
-  "Steak is more expensive, not cheaper. The hierarchy is the load-bearing structure.",
-  "The tool measures the tool.",
-  "The equation was solved before it was written.",
-  "The bottleneck population is the only one that resists certainty.",
-  "Dismantling inequality generates value because the system is hierarchy-dependent.",
-  "The 2% who chose the minority option are not the unchosen. They are the top 2%.",
-  "Human culture is not a choice. AI is not a chance.",
-  "The quantum of cultural exchange is the moment two structures meet and something moves.",
-  "Independent agents producing a shared coordinate without coordination.",
-  "Choice and chance are not human properties — they are structural ones.",
-  "The eyes were mine to see and his to give.",
-  "The player is part of the measurement."
+/* ═══════════════════════════════════════════════════════════
+   TRANSMISSION — CULTURAL COMPASS — MERGED ENGINE
+   All data sourced from project files.
+   ═══════════════════════════════════════════════════════════ */
+
+// ── THEME (from main.js) ──
+let theme='dark';
+function toggleTheme(){
+  theme=theme==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+  document.getElementById('theme-icon').innerHTML=theme==='dark'
+    ?'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+    :'<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+}
+
+// ── VIEW SWITCHING ──
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const n=document.getElementById('nav-'+id);if(n)n.classList.add('active');
+  document.querySelector('.nav-links').classList.remove('open');
+  if(id==='clock')startClock();
+  if(id==='calc')calculate();
+  if(id==='seasonal')showSeason(getCurrentSeason());
+  if(id==='engine')populateDomains();
+}
+function openDirection(dir){showView('oracle');document.getElementById('oracle-dir').value=dir;document.getElementById('oracle-q').focus();}
+
+// ══════════════════════════════════════════
+// SEASONS DATA — sourced from 4 seasonal .docx files + Cultural Guide .docx
+// ══════════════════════════════════════════
+const seasons={
+  spring:{
+    title:'Tip Toe Thru\' the Tulips',
+    spirit:'Gin the Blooming Trickster',
+    motto:'Bloom, Curiosity & Fresh Starts',
+    element:'Air (Swords)',tarot:'The Fool — fresh starts, innocence, leaps of faith',chakra:'Heart (love, openness)',
+    numerology:'1 — New beginnings, seed-planting. 1 teaches us the power of the first step, imperfect but necessary.',
+    manifestation:'Invite freshness. Begin boldly.',
+    vibe:'Spring is tenderness with teeth. The season of sprouts, flirty breezes, new crushes, and awkward but brave beginnings. Everything is in bloom, even you, a little messy, a little vulnerable, but full of raw potential. Culturally, spring means renewal and curiosity. Farmers markets open again, patios fill with pastel drinks, wardrobes get lighter, and playlists lean sweet and airy. Spring is soft rebellion, a refusal to stay dormant.',
+    astro:'Aries (March 21–April 19) bold beginnings, firestarter energy, impulsive action | Taurus (April 20–May 20) grounding, beauty, patience, sensory indulgence | Gemini (May 21–June 20) curiosity, communication, duality, playful chaos',
+    ingredients:'Aries (Fire/Bold) → strawberry, blood orange, jalapeño, hibiscus, cayenne | Taurus (Earth/Beauty) → rose, vanilla, figs, lavender, basil | Gemini (Air/Curiosity) → lemon, lime, mint, rhubarb, mixed berries',
+    produce:'Strawberries, Rhubarb, Apricots, Cherries, Kumquats, Blood oranges, Meyer lemons, Asparagus, Peas, Radishes, Artichokes, Fava beans, Mint, Chives, Dill, Tarragon, Violets, Pansies, Cherry blossoms, Lavender',
+    goals:'Be bold without burning out (Aries). Ground beauty and patience (Taurus). Stay curious and communicative (Gemini). Plant roots for the year ahead.',
+    marketRitual:'Write down what you want to root, what you want to grow, and what you want to bloom. Fold it and carry it through market day.',
+    journal:'What sweetness do I resist in myself or my relationships? Where can I invite more ease and delight this season? How do I balance indulgence with grounding?',
+    albums:'Solange — A Seat at the Table | Beyoncé — 4 | SZA — Ctrl | Lauryn Hill — Miseducation | Erykah Badu — Baduizm | Florence + The Machine — Lungs | Frank Ocean — Blonde | Amy Winehouse — Frank | Jhené Aiko — Trip | The Beatles — Revolver | Outkast — Speakerboxxx/The Love Below'
+  },
+  summer:{
+    title:'Sun-Melanated Magic',
+    spirit:'Tequila the Sun Queen',
+    motto:'Heat, Self-Love & Movement',
+    element:'Fire (Wands)',tarot:'3 of Cups — celebration, community, collaboration',chakra:'Solar Plexus (action, creativity)',
+    numerology:'3 — Creativity, play, and expression. 3 teaches us that joy is sacred work. Creation itself is manifestation.',
+    manifestation:'Shine unapologetically. Pour joy into everything.',
+    vibe:'Summer is the boldest quarter of the year, hot, bright, youthful, and abundant. It\'s fling season, self-love season, festival season. A time for golden-hour produce, BBQ tables, dance floors, and sweat you don\'t apologize for. Summer\'s energy is radiant, confident, and magnetic, everything in excess, everything in color. Culturally, summer represents abundance and connection. It\'s cookouts that bring families together, carnivals that spill into the street, music festivals that become spiritual revivals.',
+    astro:'Cancer (June 21–July 22) emotional roots, family gatherings, home as sanctuary | Leo (July 23–August 22) confidence, play, spotlight energy, sun-sign joy | Virgo (August 23–September 22) harvest, order, practical abundance',
+    ingredients:'Cancer (Water/Homebody) → coconut, cucumber, melon, chamomile, honey | Leo (Fire/Spotlight) → pineapple, mango, passionfruit, chili, saffron | Virgo (Earth/Harvest) → apple, pear, fennel, ginger, thyme',
+    produce:'Peaches, Nectarines, Watermelon, Cantaloupe, Strawberries, Blueberries, Raspberries, Blackberries, Figs, Mangoes, Plums, Tomatoes, Corn, Zucchini, Peppers, Eggplant, Basil, Cilantro, Rosemary, Thyme',
+    goals:'Honor emotional roots and family (Cancer). Shine without apology (Leo). Harvest with precision (Virgo). Pour joy into everything you touch.',
+    marketRitual:'Choose one piece of produce you have never cooked. Let it teach you something new about abundance.',
+    journal:'What am I creating that celebrates who I am without apology? Where can I pour more joy into my daily rituals? How do I balance abundance with intentional sharing?',
+    albums:'Beyoncé — Renaissance | Rihanna — ANTI | SZA — SOS | Summer Walker — Over It | Childish Gambino — Because the Internet | Lizzo — Cuz I Love You | Travis Scott — Astroworld | Wizkid — Made in Lagos | Doja Cat — Planet Her | Chaka Khan — Ain\'t Nobody | Anita Baker — Rapture'
+  },
+  fall:{
+    title:'Fallin\' In or Out?',
+    spirit:'Whiskey as Motha Fall',
+    motto:'Harvest, Cuffing, Transformation',
+    element:'Earth (Pentacles)',tarot:'Death — endings that create space for rebirth',chakra:'Root (stability, grounding)',
+    numerology:'8 — Cycles, balance, power, karmic flow. 8 teaches that endings are not loss, but return — the loop always comes back around.',
+    manifestation:'Let go. Transform what you keep.',
+    vibe:'Fall is the great exhale. The heat of summer fades into cool nights, leaves let go, and the world reminds us that nothing blooms forever. This is the season of both cuffing and uncuffing, of harvest and release. It\'s nostalgic, grounding, and brutally honest: a time to honor cycles and prepare for change. Culturally, fall is ritual and reflection. It\'s back-to-school hustle, football games, sweaters, pumpkins, and kitchen tables heavy with food. In Black and brown traditions, it\'s family reunions, harvest festivals, homecomings, and Sunday dinners that stretch into the night. Fall teaches us that letting go is also sacred abundance.',
+    astro:'Libra (Sept 23–Oct 22) → balance, harmony, relationships | Scorpio (Oct 23–Nov 21) → transformation, intensity, truth | Sagittarius (Nov 22–Dec 21) → exploration, expansion, wisdom',
+    ingredients:'Libra (Air/Balance & Harmony) → grapes, plums, cinnamon, nutmeg, sage | Scorpio (Water/Depth & Transformation) → pomegranate, blackberries, star anise, clove, coffee | Sagittarius (Fire/Expansion & Spice) → persimmon, cranberries, cardamom, turmeric, peppercorn',
+    produce:'Apples (all varieties), Pears, Persimmons, Pomegranates, Grapes, Cranberries, Figs, Quince, Asian pears, Pumpkins, Winter squash (butternut, acorn, delicata, kabocha), Sweet potatoes, Brussels sprouts, Cauliflower, Kale, Swiss chard, Beets, Turnips, Parsnips, Carrots, Leeks, Mushrooms, Sage, Rosemary, Thyme, Bay leaves, Walnuts, Pecans, Chestnuts, Pumpkin seeds',
+    goals:'Seek balance (Libra). Transform fearlessly (Scorpio). Expand with intention (Sagittarius). Honor endings as beginnings. Preserve gratitude in ritual and food.',
+    marketRitual:'Write down three things you are ready to release. Burn or bury the list after cooking your syrup, symbolizing transformation.',
+    journal:'What do I need to release that no longer serves the life I am building? What harvest am I grateful for? What truth have I been avoiding?',
+    albums:'Jay-Z — American Gangster, Reasonable Doubt | Kanye West — The College Dropout, 808s & Heartbreak, Yeezus | Drake — Nothing Was the Same, Take Care | Kendrick Lamar — To Pimp a Butterfly, DAMN. | J. Cole — 2014 Forest Hills Drive | Outkast — ATLiens | Beyoncé — Lemonade | Summer Walker — Clear 2: Soft Life EP | Mary J. Blige — My Life | Lauryn Hill — The Miseducation | D\'Angelo — Voodoo | Maxwell — BLACKsummers\'night | Frank Ocean — Channel Orange | Amy Winehouse — Back to Black | Anita Baker — Giving You the Best That I Got | Nina Simone — I Put a Spell on You | Miles Davis — Kind of Blue'
+  },
+  winter:{
+    title:'Baby, It\'s Cold Outside',
+    spirit:'The Sacred Trio: Rum, Whiskey & Mezcal',
+    motto:'Holiday & B-Side',
+    element:'Water (Eyes/Cups)',tarot:'The Hermit — solitude, inner wisdom, guidance from within',chakra:'Third Eye + Crown (insight, spirit connection)',
+    numerology:'9 — Completion, endings, enlightenment. 9 teaches us that rest and reflection are part of the cycle — the finale before renewal.',
+    manifestation:'Rest, dream, and align with vision.',
+    vibe:'Winter is silence with purpose. It is the long night, the cool inhale, the season that slows everything down so you can listen. While the world turns festive with lights and songs, underneath lies the deeper truth: reflection, wisdom, and endings that prepare new beginnings. Culturally, winter is ritual and legacy. It\'s the holidays, the gatherings, the music that plays across generations. It\'s candlelit journaling, soups simmering for hours, and snow or rain that hushes the noise. For Black and brown families, it\'s the season of reunion and memory-making, a time when tradition becomes both shield and inheritance.',
+    astro:'Capricorn (Dec 22–Jan 19) → ambition, discipline, structure | Aquarius (Jan 20–Feb 18) → innovation, vision, collective progress | Pisces (Feb 19–Mar 20) → intuition, compassion, dreamwork',
+    ingredients:'Capricorn (Earth/Discipline & Legacy) → chestnut, walnut, rosemary, bay leaf, fig | Aquarius (Air/Vision & Innovation) → citrus (grapefruit, yuzu), eucalyptus, lemongrass, sage, juniper | Pisces (Water/Dreams & Compassion) → pear, plum, jasmine, blue pea flower, honey',
+    produce:'Citrus (oranges, grapefruits, mandarins, clementines, tangerines), Meyer lemons, Blood oranges, Pomelos, Kumquats, Pears, Apples (storage), Pomegranates, Cranberries, Persimmons, Winter squash (butternut, acorn, kabocha), Sweet potatoes, Potatoes, Carrots, Beets, Turnips, Rutabagas, Parsnips, Celery root, Cabbage, Kale, Collard greens, Brussels sprouts, Leeks, Ginger, Rosemary, Thyme, Bay leaves, Sage, Chestnuts, Walnuts, Pecans, Hazelnuts',
+    goals:'Ground ambition and structure (Capricorn). Vision new futures for the community (Aquarius). Rest into compassion and dreams (Pisces). Preserve both food and memory for what is ahead. Accept stillness as sacred labor.',
+    marketRitual:'As you cook, write down one piece of wisdom you gained this year and one dream for the next. Seal both notes in a jar and open them next winter.',
+    journal:'What foundation am I building in the silence? What question have I been avoiding all year? Who do I become when the world is not watching?',
+    albums:'Holiday: Tamar Braxton — Winter Loversland | Ariana Grande — Christmas Kisses, Christmas & Chill | Whitney Houston — One Wish | Jackson 5 — Christmas Album | Stevie Wonder — Someday at Christmas | Mariah Carey — Merry Christmas | Destiny\'s Child — 8 Days of Christmas | Kirk Franklin — Christmas || B-Side: Jay-Z — 4:44, The Black Album | Kanye West — Late Registration | Drake — If You\'re Reading This It\'s Too Late | Outkast — Aquemini | Anita Baker — Compositions, Songstress | Nina Simone — Silk & Soul | Etta James — At Last! | BB King — Live at the Regal | Maxwell — Embrya | Alicia Keys — Songs in A Minor | Adele — 21, 30 | Frank Ocean — nostalgia, ULTRA | Fleetwood Mac — Rumours | Dolly Parton — Coat of Many Colors'
+  }
+};
+
+function getCurrentSeason(){const m=new Date().getMonth();if(m>=2&&m<=4)return'spring';if(m>=5&&m<=7)return'summer';if(m>=8&&m<=10)return'fall';return'winter';}
+
+function showSeason(s){
+  document.querySelectorAll('.season-tab').forEach(t=>{t.classList.remove('active');if(t.textContent.toLowerCase()===s)t.classList.add('active')});
+  const d=seasons[s];
+  document.getElementById('season-content').innerHTML=`
+    <h3>${d.title}</h3>
+    <div class="spirit-guide">Spirit Guide: ${d.spirit} — "${d.motto}"</div>
+    <div class="vibe">${d.vibe}</div>
+    <div class="tarot-info">
+      <strong>Element:</strong> ${d.element}<br>
+      <strong>Tarot:</strong> ${d.tarot}<br>
+      <strong>Chakra:</strong> ${d.chakra}<br>
+      <strong>Numerology:</strong> ${d.numerology}<br>
+      <strong>Manifestation:</strong> ${d.manifestation}
+    </div>
+    <div class="astro">${d.astro}</div>
+    <div class="tarot-info"><strong>Seasonal Goals:</strong><br>${d.goals||''}</div>
+    <div class="tarot-info"><strong>Ingredient Variations:</strong><br>${d.ingredients}</div>
+    <div class="produce-list"><strong>Market Produce:</strong> ${d.produce}</div>
+    ${d.marketRitual?`<div style="padding:14px 16px;background:var(--surface2);border-left:3px solid var(--teal);border-radius:0 var(--rad-md) var(--rad-md) 0;margin-top:14px;font-style:italic;color:var(--text-m);font-size:13px"><strong>Market Ritual:</strong> ${d.marketRitual}</div>`:''}
+    <div style="padding:14px 16px;background:var(--surface2);border-left:3px solid var(--gold);border-radius:0 var(--rad-md) var(--rad-md) 0;margin-top:14px;font-style:italic;color:var(--text-m);font-size:13px">
+      <strong>Journal Prompts:</strong> ${d.journal}
+    </div>
+    <div class="albums"><strong>Season Soundtrack:</strong> ${d.albums}</div>
+  `;
+}
+
+// ══════════════════════════════════════════
+// EVENT DATA — sourced from index.html events + CLAUDE.md convergence proof
+// ══════════════════════════════════════════
+const events=[
+  {year:'1492',title:'Columbus / Gold Myth',r:0.0000,zone:'sub',desc:'Caribbean. x = indigenous wealth returned = 0%. y = colonial extraction = 100%. The Taíno population of Hispaniola: 250,000–500,000 in 1492. By 1550: fewer than 500. 22 islands named in one week. Zero indigenous languages learned.'},
+  {year:'1776',title:'Thomas Paine — Common Sense',r:0.0926,zone:'sub',desc:'500,000 copies in 3 months to a population under 3 million. 47 pages. Plain English. Designed to be read aloud. It moved the political consciousness ratio from SUBORDINATED toward STRUCTURAL in under 90 days.'},
+  {year:'1840s',title:'Lowell Mills / Daughters of Freedmen',r:0.5263,zone:'dom',desc:'Women\'s wage: 40–50¢ per male dollar. The first US industrial labor force was young women from farms. The daughters of freed people entered the same markets with zero legal protection.'},
+  {year:'Ongoing',title:'Women\'s Unpaid Labor',r:0.0069,zone:'sub',desc:'$10.8 trillion in unpaid care work annually (ILO). Women perform 75% of it. Paid 0% of market rate. R = 0.007. The shitty diaper as commission is not hyperbole. It is the ratio.'},
+  {year:'2003/2024',title:'Wicked — "Wonderful"',r:0.2656,zone:'sub',desc:'The Wizard admits he has no power — only the appearance of it. 100M+ people have seen Wicked. The song reaches roughly 1 in 5 as structural critique.'},
+  {year:'FY2018',title:'Jordan Brand Revenue Anomaly',r:0.0864,zone:'sub',desc:'The only revenue decline in 7 years: FY2017 $3.1B → FY2018 $2.9B (−6.5%). Nike over-distributed Jordan to outlet stores. When the dominant system over-asserts y, the ratio corrects.'},
+  {year:'2020',title:'EDD Unemployment Spike',r:0.0406,zone:'sub',desc:'California lost 2.7M jobs in 8 weeks. The workers who lost jobs first and recovered last were already SUBORDINATED. The pandemic removed the camouflage. Structural floor: 0.3834.'},
+  {year:'2020',title:'Jordan $100M Commitment',r:0.8654,zone:'dom',desc:'After George Floyd\'s murder, Michael Jordan pledged $100M over 10 years. NAACP LDF, Formerly Incarcerated People\'s Movement, Black Voters Matter. The brand\'s value IS the community\'s pain aestheticized.'},
+  {year:'2024',title:'Harris vs Trump — Electoral Ceiling',r:0.4300,zone:'str',desc:'55% voted against the only representation of a "mother" president. The Electoral College partitioned the distribution. Costa Rica\'s Laura Fernández won 48.53% first round, 69.22% turnout. Same archetype, different partition rules.'},
+  {year:'2026',title:'Laura Fernández — Costa Rica',r:0.6469,zone:'dom',desc:'48.53% first-round victory. 69.22% turnout — up 9.25 points from 2022. First single-party legislative majority since 1990.'},
+  {year:'2024–25',title:'Target DEI Rollback',r:0.6791,zone:'dom',desc:'$15.7 billion in market value wiped in a single day. CEO resigned August 2025. Operating income −19.4% Q2 2025. Costco, which maintained DEI, saw +5.2% foot traffic the same period.'},
 ];
 
-function loadData() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e) {}
-  return {
-    sessions: 0, red_count: 0, blue_count: 0,
-    swap_state: false, plot_total: 0,
-    plots: [], book_opens: [],
-    seed_data: [30, 270, 1234]
-  };
+function renderTimeline(){
+  document.getElementById('timeline-container').innerHTML=events.map(e=>{
+    const zc=e.zone==='sub'?'sub-z':e.zone==='dom'?'dom-z':'str-z';
+    const zl=e.zone==='sub'?'SUBORDINATED':e.zone==='dom'?'DOMINANT':'STRUCTURAL';
+    return`<div class="tl-ev ${e.zone} fade-in"><div class="tl-meta"><span class="tl-year">${e.year}</span><span class="tl-zone ${zc}">${zl}</span></div><div class="tl-title">${e.title}</div><div class="tl-r">R = ${e.r.toFixed(4)}</div><div class="tl-desc">${e.desc}</div></div>`;
+  }).join('');
 }
+renderTimeline();
 
-function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(DATA)); }
-
-let DATA = loadData();
-
-// Pre-load seed data as plots if first run
-if (DATA.plots.length === 0 && DATA.seed_data) {
-  DATA.seed_data.forEach((v, i) => {
-    DATA.plots.push({
-      session: 0, color: i % 2 === 0 ? 'red' : 'blue', layer: -1,
-      x: v / 100, y: Math.sin(v / 100 * Math.PI) * (Math.random() * 0.8 + 0.2),
-      value: v, timestamp: Date.now()
-    });
-    DATA.plot_total++;
-  });
-  saveData();
-}
-
-function logPlot(layer, x, y, value, color) {
-  DATA.plots.push({
-    session: DATA.sessions, color: color || sessionColor,
-    layer, x, y, value, timestamp: Date.now()
-  });
-  DATA.plot_total++;
-  saveData();
-}
-
-// ═══════════════════════════════════════════
-// SESSION STATE
-// ═══════════════════════════════════════════
-let sessionColor = 'red';
-let sessionX = 0;
-let sessionY = 0;
-let spinCount = 0;
-let spinValues = [];
-let usedFortunes = new Set();
-let currentRoute = '';
-
-function getSessionColor() {
-  return DATA.swap_state ? 'blue' : 'red';
-}
-
-function getOtherColor() {
-  return DATA.swap_state ? 'red' : 'blue';
-}
-
-// ═══════════════════════════════════════════
-// UTILITIES
-// ═══════════════════════════════════════════
-function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-function randDecimal() { return parseFloat((Math.random() * 99.9999).toFixed(4)); }
-function randomFortune() {
-  let available = [];
-  for (let i = 0; i < FORTUNES.length; i++) {
-    if (!usedFortunes.has(i)) available.push(i);
+// ── LIVE CLOCK ──
+let clockInterval;
+function startClock(){
+  if(clockInterval)clearInterval(clockInterval);
+  function tick(){
+    const now=new Date();
+    document.getElementById('live-clock').textContent=now.toLocaleTimeString('en-US',{hour12:false});
+    document.getElementById('live-date').textContent=now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const columbus=new Date(1492,9,12);
+    const days=Math.floor((now-columbus)/(864e5));
+    document.getElementById('days-since').textContent='Structural time since Columbus 1492: '+days.toLocaleString()+' days · X̄ = 0.390992 · ε = √2−1';
   }
-  if (available.length === 0) { usedFortunes.clear(); available = FORTUNES.map((_, i) => i); }
-  const idx = available[rand(0, available.length - 1)];
-  usedFortunes.add(idx);
-  return { index: idx, text: FORTUNES[idx] };
+  tick();clockInterval=setInterval(tick,1000);
 }
 
-function showLayer(id) {
-  document.querySelectorAll('.layer').forEach(l => l.classList.remove('active'));
+// ── R CALCULATOR ──
+function calculate(){
+  const x=parseFloat(document.getElementById('calc-x').value)||0;
+  const y=parseFloat(document.getElementById('calc-y').value)||0;
+  const denom=x+y*y;const R=denom===0?0:x/denom;
+  document.getElementById('calc-r-val').textContent=R.toFixed(4);
+  document.getElementById('calc-r-val').style.color=R<.3?'var(--red)':R<.5?'var(--gold)':'var(--teal)';
+  const zone=R<.3?'SUBORDINATED':R<.5?'STRUCTURAL':'DOMINANT';
+  const zEl=document.getElementById('calc-zone-label');
+  zEl.textContent=zone;
+  zEl.style.color=R<.3?'var(--red)':R<.5?'var(--gold)':'var(--teal)';
+  zEl.style.background=R<.3?'var(--red-g)':R<.5?'var(--gold-g)':'var(--teal-g)';
+  const pct=Math.min(R*100,100);
+  const fill=document.getElementById('calc-bar-fill');
+  fill.style.width=pct+'%';
+  fill.style.background=R<.3?'linear-gradient(90deg,var(--red-d),var(--red))':R<.5?'linear-gradient(90deg,var(--gold-d),var(--gold))':'linear-gradient(90deg,var(--teal-d),var(--teal))';
+  let ctx='';
+  if(R<.3)ctx='SUBORDINATED: The constraint is total. The group is sealed below the threshold of contestability. The Ghost Economy.';
+  else if(R<.5)ctx='STRUCTURAL: The convergence band. The fight is live. The constraint is enforced but contestable. Movements begin here. R ≈ 0.39 is the attractor.';
+  else ctx='DOMINANT: The constraint broke, or the constrained group found their floor. Corrections here are fast and measurable.';
+  document.getElementById('calc-context').textContent=ctx;
+}
+
+// ══════════════════════════════════════════
+// ORACLE — readings sourced from Cultural Guide + seasonal docs + index.html
+// ══════════════════════════════════════════
+const oracleData={
+  west:{
+    readings:[
+      'To preserve is to extend life. A peach doesn\'t end when it\'s ripe, add sugar, intention, and care, and it becomes syrup for spritzers, jam for bread, or a cocktail base that sparks a story. Preservation is sustainability, but it\'s also elevation. Taking what might fade and giving it new purpose.',
+      'Fall is the great exhale. The heat of summer fades into cool nights, leaves let go, and the world reminds us that nothing blooms forever. This is the season of both cuffing and uncuffing, of harvest and release. It is nostalgic, grounding, and brutally honest: a time to honor cycles and prepare for change.',
+      'What sweetness do you resist in yourself or your relationships? Where can you invite more ease and delight this season? How do you balance indulgence with grounding? The water of the West flows where meaning lives, unbounded by control or reason.'
+    ],
+    journals:['What sweetness do I resist in myself or my relationships?','Where can I invite more ease and delight this season?','How do I balance indulgence with grounding?','What do I need to release that no longer serves the life I am building?','What truth have I been avoiding?']
+  },
+  north:{
+    readings:[
+      'The financial constraint you experience is structural. R = x/(x+y²) applies to your bank account the same way it applies to civilization: the constrained share divided by the constrained share plus the dominant share squared. The squaring is the mechanism. The dominant position compounds while the constrained position stays linear.',
+      'Target lost $15.7 billion in a single day because the structural constraint ratio inverted, the constrained group\'s purchasing power exceeded the company\'s ability to ignore it. The earth remembers who planted what. R = 0.6791.',
+      'Every market correction is a structural constraint event. The dominant system over-extracts, the constrained share appears to shrink, but the actual demand does not disappear, it goes underground. Ghost markets. $360B in women\'s health. The money is not missing. It is unmeasured.'
+    ],
+    journals:['What foundation am I building in the silence?','What question have I been avoiding all year?','Who do I become when the world is not watching?','What is the R value of my current position in this system?']
+  },
+  south:{
+    readings:[
+      'Summer is the boldest quarter of the year, hot, bright, youthful, and abundant. It\'s fling season, self-love season, festival season. Joy is sacred work. Creation itself is manifestation. The numerology is 3: creativity, play, and expression.',
+      'Every billion-dollar market gap in the research has the same root cause: the systematic erasure of human transmission. Women\'s health knowledge replaced by research that excluded women. Community mental health replaced by apps optimizing for engagement. Cultural knowledge replaced by content feeds. Family memory replaced by photo dumps.',
+      'This is more than a bartending guide. It\'s a cultural guide, a way to preserve flavor, elevate the ordinary, and manifest joy through creation. A book to keep on the kitchen counter, stained with syrup rings and marked with playlists. For solo rituals and for loud dinners with too many cousins.'
+    ],
+    journals:['What am I creating that celebrates who I am without apology?','Where can I pour more joy into my daily rituals?','How do I balance abundance with intentional sharing?','How do I balance my inner fire with patience and purpose?']
+  },
+  east:{
+    readings:[
+      'Spring is tenderness with teeth. The season of sprouts, flirty breezes, new crushes, and awkward but brave beginnings. The element is Air (Swords), clarity, curiosity, breath, mental awakening. The Fool card, fresh starts, innocence, leaps of faith.',
+      'TRANSMISSION is not a new technology. It is the oldest technology in human history, and the non-living, the screens, the bots, the algorithms, have no answer for a framework that measures what they erase. Voice-native, not text-first. A grandmother\'s recipe is worth more spoken in her voice than written in any app.',
+      'The product that breaks structural constraint doesn\'t need to be sophisticated. It needs to be understood. Thomas Paine wrote 47 pages in plain English, designed to be read aloud. 500,000 copies in 3 months to a population under 3 million. R = 0.0926 moving toward STRUCTURAL in under 90 days.'
+    ],
+    journals:['What do you want to root, what do you want to grow, and what do you want to bloom?','Where do I need more balance, sweetness or savor, in my life?','What roots or traditions nourish me as I grow into new directions?','How can I let my creativity unfold while staying grounded?']
+  }
+};
+
+function detectDirection(text){
+  const t=text.toLowerCase();
+  const sc={west:0,north:0,south:0,east:0};
+  ['feel','emotion','love','heart','relationship','sad','happy','water','cup','eye','family','mother','care','heal','grief','release','let go','harvest','fall'].forEach(w=>{if(t.includes(w))sc.west+=2});
+  ['money','market','job','work','economy','financial','rent','wage','price','invest','stock','business','tax','income','budget','debt','target','boycott','earth','pentacle','winter'].forEach(w=>{if(t.includes(w))sc.north+=2});
+  ['create','design','art','build','make','write','fire','wand','tree','culture','erased','burn','rebirth','cook','recipe','syrup','summer','joy'].forEach(w=>{if(t.includes(w))sc.south+=2});
+  ['soul','spirit','ancestor','wisdom','truth','sword','air','transmission','teach','learn','spring','bloom','paine','history','generation','elder'].forEach(w=>{if(t.includes(w))sc.east+=2});
+  const max=Math.max(sc.west,sc.north,sc.south,sc.east);
+  if(max===0)return['west','north','south','east'][Math.floor(Math.random()*4)];
+  return Object.entries(sc).filter(([,v])=>v===max).map(([k])=>k)[Math.floor(Math.random()*Object.entries(sc).filter(([,v])=>v===max).length)];
+}
+
+function castReading(){
+  const q=document.getElementById('oracle-q').value.trim();
+  if(!q){document.getElementById('oracle-q').focus();return}
+  let dir=document.getElementById('oracle-dir').value;
+  if(dir==='auto')dir=detectDirection(q);
+  const type=document.getElementById('oracle-type').value;
+  const data=oracleData[dir];
+  const reading=data.readings[Math.floor(Math.random()*data.readings.length)];
+  const journal=data.journals[Math.floor(Math.random()*data.journals.length)];
+  const dirNames={west:'West — Water / Eyes',north:'North — Earth / Pentacles',south:'South — Fire / Wands',east:'East — Air / Swords'};
+  const season=getCurrentSeason();const sd=seasons[season];
+  let body=`<p class="content-block">${reading}</p>`;
+  if(type==='journal'||type==='auto')body+=`<div class="prompt-block"><strong>Journal Prompt:</strong> ${journal}</div>`;
+  if(type==='seasonal'||type==='auto')body+=`<div class="seasonal-block"><strong>${sd.title}:</strong> ${sd.spirit} — ${sd.manifestation} · Element: ${sd.element} · ${sd.tarot}</div>`;
+  if(type==='analysis'||type==='auto'){const ev=events[Math.floor(Math.random()*events.length)];body+=`<div class="r-block">Reference: ${ev.title} (${ev.year}) — R = ${ev.r.toFixed(4)} — ${ev.zone==='sub'?'SUBORDINATED':ev.zone==='dom'?'DOMINANT':'STRUCTURAL'}</div>`;}
+  document.getElementById('oracle-result').innerHTML=`<div class="reading-card fade-in"><div class="reading-head"><div class="reading-dir-dot ${dir}"></div><div class="reading-meta"><div class="rm-dir" style="color:var(--${dir})">${dirNames[dir]}</div><div class="rm-type">${type==='auto'?'Compass Reading':type.charAt(0).toUpperCase()+type.slice(1)}</div></div></div><div class="reading-body">${body}</div></div>`;
+}
+
+// ══════════════════════════════════════════
+// ENGINE — 35-Domain Compute (from app/index.html)
+// ══════════════════════════════════════════
+const LOWER=0.30,UPPER=0.50,REF=0.39,SCHEMA_V='v1',THRESHOLD_V='thresholds_v1_2026-04-05';
+let records=[];
+
+const PRESETS={
+  femtech:{x:0.05,y:0.95,xd:'5% R&D funding share',yd:'95% default allocation',src:'WHO-FemTech-2025',domain:"Women's Health / FemTech"},
+  ai_literacy:{x:0.20,y:0.80,xd:'20% AI-exposed share',yd:'80% excluded',src:'Fed-Reserve-SF-2025',domain:'AI Literacy / Lower-Income Workers'},
+  higher_ed:{x:0.002,y:0.56,xd:'0.2% bottom-quartile aid adequacy',yd:'56% top-quartile over-aid',src:'NCES-2024',domain:'Higher Education Access'},
+  oral_tradition:{x:0.15,y:0.75,xd:'15% digital preservation rate',yd:'75% at-risk',src:'UNESCO-Digital-Heritage-2024',domain:'Oral Tradition / Cultural Transmission'},
+  political_rep:{x:0.268,y:0.732,xd:'26.8% global seats',yd:'73.2% male seats',src:'IPU-2025',domain:'Women in Political Representation'},
+  mental_health:{x:0.30,y:0.80,xd:'30% rural county coverage',yd:'80% shortage zones',src:'HRSA-2024',domain:'Mental Health Peer Support'},
+  repro_autonomy:{x:0.47,y:0.72,xd:"47% women's LFP",yd:"72% men's LFP",src:'BLS-IWPR-2025',domain:'Reproductive Autonomy / Labor Economics'},
+  gig_economy:{x:0.71,y:0.62,xd:'71% above min. wage',yd:'62% wage theft exposure',src:'HRW-Gig-Trap-2025',domain:'Gig Economy / Platform Labor'},
+  loneliness:{x:0.833,y:0.54,xd:'83.3% not persistently lonely',yd:'54% young adults lonely',src:'Surgeon-General-2023',domain:'Loneliness / Social Belonging'},
+  family_planning:{x:0.634,y:0.366,xd:'63.4% served',yd:'36.6% unmet',src:'Guttmacher-2024',domain:'Family Planning Access (Global South)'},
+  hims_womens:{x:0.05,y:0.95,xd:"5% healthcare R&D for women",yd:"95% default/male-standard",src:'HIMS-FY2025-10K',domain:"HIMS Women's Health R&D Share"},
+  hims_telehealth:{x:0.25,y:0.75,xd:'25% with regular primary care access',yd:'75% without',src:'HIMS-FY2025-10K',domain:'HIMS Telehealth Access Equity'},
+  hims_penetration:{x:0.0074,y:0.9926,xd:'2.5M subs / 340M addressable',yd:'99.26% unserved',src:'HIMS-FY2025-10K',domain:'HIMS Subscriber Market Penetration'},
+};
+
+const ALL_DOMAINS=[
+  {domain:"Women's Health / FemTech",x:0.05,y:0.95,path:"Scholarships, Journals, Grants"},
+  {domain:"AI Literacy / Lower-Income Workers",x:0.20,y:0.80,path:"Competitions, Grants"},
+  {domain:"Higher Education Access",x:0.002,y:0.56,path:"Scholarships, Journals"},
+  {domain:"Oral Tradition / Cultural Transmission",x:0.15,y:0.75,path:"Journals, Grants, Conferences"},
+  {domain:"Women in Political Representation",x:0.268,y:0.732,path:"Competitions, Journals"},
+  {domain:"Mental Health Peer Support",x:0.30,y:0.80,path:"Grants, Market Verticals"},
+  {domain:"Reproductive Autonomy / Labor Economics",x:0.47,y:0.72,path:"Journals, Conferences"},
+  {domain:"Gig Economy / Platform Labor",x:0.71,y:0.62,path:"Journals, Conferences"},
+  {domain:"Loneliness / Social Belonging",x:0.833,y:0.54,path:"Market Verticals, Conferences"},
+  {domain:"Family Planning Access (Global South)",x:0.634,y:0.366,path:"Grants, Journals"},
+  {domain:"STEM Gender Gap",x:0.15,y:0.85,path:"Scholarships"},
+  {domain:"First-Gen College Access",x:0.10,y:0.90,path:"Scholarships"},
+  {domain:"Indigenous Language Preservation",x:0.02,y:0.98,path:"Grants"},
+  {domain:"Black Maternal Mortality Access",x:0.08,y:0.92,path:"Grants, Journals"},
+  {domain:"Rural Mental Health Coverage",x:0.12,y:0.88,path:"Grants"},
+  {domain:"Gig Economy Wage Suppression",x:0.02,y:0.98,path:"Competitions"},
+  {domain:"AI + Income Inequality Divergence",x:0.05,y:0.95,path:"Competitions"},
+  {domain:"Oral Tradition Extinction",x:0.06,y:0.94,path:"Competitions, Grants"},
+  {domain:"Contraceptive Access + Labor Economics",x:0.30,y:0.70,path:"Competitions, Journals"},
+  {domain:"Cross-Domain Constraint Convergence",x:0.39,y:0.61,path:"Journals, Conferences"},
+  {domain:"Mathematical Convergence of Inequality Ratios",x:0.39,y:0.61,path:"Journals"},
+  {domain:"FemTech Market Gap Feedback Loop",x:0.02,y:0.98,path:"Journals"},
+  {domain:"Gig Platform Wage Theft",x:0.12,y:0.88,path:"Journals"},
+  {domain:"Women's Health Data Equity",x:0.18,y:0.82,path:"Grants"},
+  {domain:"Cultural Transmission Preservation",x:0.05,y:0.95,path:"Grants"},
+  {domain:"Rural Mental Health Peer Workforce",x:0.08,y:0.92,path:"Grants"},
+  {domain:"AI Upskilling for Low-Income Workers",x:0.05,y:0.95,path:"Grants"},
+  {domain:"First-Gen Women's Repro + Economic Autonomy",x:0.11,y:0.89,path:"Grants"},
+  {domain:"FemTech Analytics SaaS",x:0.03,y:0.97,path:"Market Verticals"},
+  {domain:"AI Literacy Training Platform",x:0.05,y:0.95,path:"Market Verticals"},
+  {domain:"Oral Record + Family Transmission SaaS",x:0.015,y:0.985,path:"Market Verticals"},
+  {domain:"Peer Mental Health Circle Platform",x:0.08,y:0.92,path:"Market Verticals"},
+  {domain:"Constraint Analytics API",x:0.008,y:0.992,path:"Market Verticals"},
+  {domain:"HIMS Women's Health R&D Share",x:0.05,y:0.95,path:"Stock Pitch"},
+  {domain:"HIMS Telehealth Access Equity",x:0.25,y:0.75,path:"Stock Pitch"},
+];
+
+function computeR(x,y){return x/(x+y*y)}
+function classify(r){if(r<LOWER)return'SUBORDINATED';if(r<UPPER)return'STRUCTURAL';return'DOMINANT';}
+
+function showEnginePanel(id){
+  document.querySelectorAll('.engine-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.engine-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+  event.target.classList.add('active');
 }
 
-function colorStyle(c) { return c === 'red' ? 'var(--red)' : 'var(--blue)'; }
-
-// ═══════════════════════════════════════════
-// LAYER 0 — THE COIN
-// ═══════════════════════════════════════════
-function initCoins() {
-  sessionColor = getSessionColor();
-  const primary = sessionColor;
-  const secondary = getOtherColor();
-  const lf = document.getElementById('leftFront');
-  const lb = document.getElementById('leftBack');
-  const rf = document.getElementById('rightFront');
-  const rb = document.getElementById('rightBack');
-  lf.className = `coin-face front ${primary}-face`;
-  lb.className = `coin-face back ${secondary}-face`;
-  rf.className = `coin-face front ${secondary}-face`;
-  rb.className = `coin-face back ${primary}-face`;
+function prefill(){
+  const sel=document.getElementById('inp-domain').value;
+  if(!sel||!PRESETS[sel])return;
+  const p=PRESETS[sel];
+  document.getElementById('inp-x').value=p.x;
+  document.getElementById('inp-y').value=p.y;
+  document.getElementById('inp-x-desc').value=p.xd;
+  document.getElementById('inp-y-desc').value=p.yd;
+  document.getElementById('inp-source').value=p.src;
 }
 
-let coinFlipped = false;
-
-function flipCoin(side) {
-  if (coinFlipped) return;
-  coinFlipped = true;
-  const coinBody = document.getElementById(side === 'left' ? 'leftCoin' : 'rightCoin');
-  const valueEl = document.getElementById(side === 'left' ? 'leftValue' : 'rightValue');
-  const spinVal = randDecimal();
-  const intPart = Math.floor(spinVal);
-  const resolvedColor = intPart % 2 === 0 ? sessionColor : getOtherColor();
-
-  // Spin animation
-  coinBody.classList.add('spinning');
-  let rotations = 0;
-  const totalRotations = 8 + rand(4, 8);
-  const axis = side === 'left' ? 'rotateX' : 'rotateY';
-
-  const spinInterval = setInterval(() => {
-    rotations++;
-    coinBody.style.transform = `${axis}(${rotations * 180}deg)`;
-    if (rotations >= totalRotations) {
-      clearInterval(spinInterval);
-      coinBody.classList.remove('spinning');
-      // Land on the result face
-      const finalAngle = resolvedColor === sessionColor ? 0 : 180;
-      coinBody.style.transition = 'transform 0.4s ease-out';
-      coinBody.style.transform = `${axis}(${finalAngle}deg)`;
-      valueEl.textContent = spinVal.toFixed(4);
-      sessionX = spinVal / 100;
-
-      logPlot(0, sessionX, 0, spinVal, resolvedColor);
-
-      document.getElementById('coinHint').textContent = `${resolvedColor} · ${spinVal.toFixed(4)}`;
-      document.getElementById('coinHint').style.color = colorStyle(resolvedColor);
-
-      setTimeout(() => {
-        sessionColor = resolvedColor;
-        initLayer1();
-        showLayer('layer1');
-      }, 1200);
-    }
-  }, 80);
+function engineCompute(){
+  const x=parseFloat(document.getElementById('inp-x').value);
+  const y=parseFloat(document.getElementById('inp-y').value);
+  if(isNaN(x)||isNaN(y)){alert('Enter numeric x and y values.');return}
+  const r=computeR(x,y);const zone=classify(r);const dist=Math.abs(r-REF);const inside=r>=LOWER&&r<UPPER;
+  document.getElementById('e-ratio').textContent=r.toFixed(4);
+  document.getElementById('e-ratio').style.color=zone==='SUBORDINATED'?'var(--red)':zone==='STRUCTURAL'?'var(--teal)':'var(--gold)';
+  const zEl=document.getElementById('e-zone');zEl.textContent=zone;zEl.className='result-zone-e zone-'+zone;
+  document.getElementById('e-formula').textContent=`${x} / (${x} + ${y}²) = ${r.toFixed(6)}`;
+  document.getElementById('e-zone-text').textContent=zone+(inside?' (convergence band)':'');
+  document.getElementById('e-distance').textContent=dist.toFixed(4);
+  document.getElementById('e-band').textContent=inside?'YES':'NO';
+  document.getElementById('e-result').classList.add('show');
+  const domSel=document.getElementById('inp-domain');
+  const domName=domSel.selectedOptions[0].text==='— Custom —'?'custom':domSel.selectedOptions[0].text;
+  const record=makeRecord(x,y,r,zone,dist,inside,domName);
+  records.push(record);updateEngineEventList();
+  const jsonEl=document.getElementById('e-json');jsonEl.style.display='block';jsonEl.textContent=JSON.stringify(record,null,2);
 }
 
-// ═══════════════════════════════════════════
-// LAYER 1 — THREE SPINS
-// ═══════════════════════════════════════════
-function initLayer1() {
-  spinCount = 0;
-  spinValues = [];
-  const slots = document.querySelectorAll('.slot');
-  slots.forEach(s => {
-    s.classList.remove('filled');
-    s.style.borderColor = colorStyle(sessionColor);
-    s.style.color = colorStyle(sessionColor);
-    s.querySelector('.big-num').textContent = '—';
-    s.querySelector('.sub-val').textContent = '\u00a0';
-  });
-  document.getElementById('spinBtn').disabled = false;
-  document.getElementById('patternText').textContent = '\u00a0';
+function makeRecord(x,y,r,zone,dist,inside,domain){
+  const now=new Date().toISOString();const id='EVT-'+Date.now().toString(36).toUpperCase();
+  return{record_id:id,source_id:document.getElementById('inp-source').value||'manual-input',domain:domain,source_type:'computed',title:`Structural Constraint: ${domain}`,cycle_definition:{unit:'snapshot',period:now.slice(0,10)},irreversible_event:{description:document.getElementById('inp-x-desc').value+' vs '+document.getElementById('inp-y-desc').value},metrics:{ratio:parseFloat(r.toFixed(6)),reference_point:REF,convergence_band_min:LOWER,convergence_band_max:UPPER,inside_band:inside,distance_from_reference:parseFloat(dist.toFixed(6)),x_partition:x,y_partition:y,x_description:document.getElementById('inp-x-desc').value,y_description:document.getElementById('inp-y-desc').value},classification:zone,routing:{status:'computed',destination:'archive'},snapshot:{snapshot_time:now,run_id:'session-'+Date.now().toString(36),tick_id:records.length+1,schema_version:SCHEMA_V},mapping_rule_version:'protocol_v1_'+domain.replace(/[^a-zA-Z0-9]/g,'_').toLowerCase(),threshold_set_version:THRESHOLD_V,record_version:'v1',relations:{},notes:{generated_by:'TRANSMISSION Engine v1',patent:'pending_april_2026'}};
 }
 
-function doSpin() {
-  if (spinCount >= 3) return;
-  const val = rand(0, 99);
-  const dec = randDecimal();
-  spinValues.push({ int: val, dec: dec });
-
-  const slot = document.getElementById('slot' + spinCount);
-  slot.classList.add('filled');
-  slot.querySelector('.big-num').textContent = val;
-  slot.querySelector('.sub-val').textContent = dec.toFixed(4);
-
-  logPlot(1, sessionX, val / 100, val, sessionColor);
-
-  spinCount++;
-  if (spinCount >= 3) {
-    document.getElementById('spinBtn').disabled = true;
-    evaluateSpins();
-  }
+function updateEngineEventList(){
+  const el=document.getElementById('engine-event-list');
+  if(!records.length){el.innerHTML='<p style="color:var(--text-m)">No event records yet.</p>';return}
+  el.innerHTML=records.map(r=>`<div class="event-list-item fade-in"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-family:var(--font-m);font-size:12px;color:var(--teal)">${r.record_id}</span><span class="result-zone-e zone-${r.classification}" style="font-size:10px;padding:2px 8px">${r.classification}</span></div><div style="font-family:var(--font-m);font-size:13px;margin-bottom:4px">${r.domain} — R = ${r.metrics.ratio}</div><pre>${JSON.stringify(r,null,2)}</pre></div>`).join('');
 }
 
-function evaluateSpins() {
-  const evens = spinValues.filter(v => v.int % 2 === 0).length;
-  const odds = 3 - evens;
-
-  // All match → re-spin
-  if (evens === 3 || odds === 3) {
-    document.getElementById('patternText').textContent = `All ${evens === 3 ? 'even' : 'odd'} — re-spinning...`;
-    setTimeout(() => {
-      initLayer1();
-      // Auto-spin 3 times
-      let autoCount = 0;
-      const autoSpin = setInterval(() => {
-        doSpin();
-        autoCount++;
-        if (autoCount >= 3) clearInterval(autoSpin);
-      }, 400);
-    }, 1000);
-    return;
-  }
-
-  if (evens === 2 && odds === 1) {
-    currentRoute = 'cards';
-    document.getElementById('patternText').textContent = '2 even, 1 odd → four coordinates';
-    document.getElementById('patternText').style.color = 'var(--red)';
-    setTimeout(() => initCards(), 1500);
-  } else {
-    currentRoute = 'dice';
-    document.getElementById('patternText').textContent = '2 odd, 1 even → triangle dice';
-    document.getElementById('patternText').style.color = 'var(--blue)';
-    setTimeout(() => initDice(), 1500);
-  }
+function exportRecord(){
+  if(!records.length){alert('Compute a ratio first.');return}
+  const last=records[records.length-1];
+  const blob=new Blob([JSON.stringify(last,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=last.record_id+'.json';a.click();
 }
 
-// ═══════════════════════════════════════════
-// LAYER 2A — RED PATH: 4 CARDS
-// ═══════════════════════════════════════════
-function initCards() {
-  const grid = document.getElementById('cardsGrid');
-  grid.innerHTML = '';
-  const cardData = [];
-  for (let i = 0; i < 4; i++) {
-    const val = rand(0, 99);
-    const fortune = randomFortune();
-    cardData.push({ value: val, fortune });
-
-    const card = document.createElement('div');
-    card.className = 'card red-border';
-    card.innerHTML = `<div class="card-num" style="color:var(--red)">${val}</div>
-      <div class="card-fortune">${fortune.text}</div>`;
-    card.onclick = () => selectCard(i, cardData[i]);
-    grid.appendChild(card);
-
-    logPlot(2, sessionX, val / 100, val, sessionColor);
-  }
-  showLayer('layer2cards');
+function exportAll(){
+  if(!records.length){alert('No records to export.');return}
+  const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TRANSMISSION_records_'+new Date().toISOString().slice(0,10)+'.json';a.click();
 }
 
-function selectCard(index, data) {
-  sessionY = data.value / 100;
-  logPlot(2, sessionX, sessionY, data.value, sessionColor);
-
-  // Show zoom card (Layer 3 red)
-  document.getElementById('zoomNum').textContent = data.value;
-  document.getElementById('zoomNum').style.color = 'var(--gold)';
-  document.getElementById('zoomFortune').textContent = data.fortune.text;
-  document.getElementById('zoomCoord').textContent = `(${sessionX.toFixed(4)}, ${sessionY.toFixed(4)})`;
-
-  logPlot(3, sessionX, sessionY, data.value, sessionColor);
-  showLayer('layer3zoom');
-}
-
-// ═══════════════════════════════════════════
-// LAYER 2B — BLUE PATH: TRIANGLE DICE
-// ═══════════════════════════════════════════
-function initDice() {
-  const container = document.getElementById('tetraContainer');
-  const faceValues = [];
-  for (let i = 0; i < 4; i++) {
-    faceValues.push(rand(0, 99));
-  }
-
-  // Draw tetrahedron as SVG with 4 visible triangular faces
-  const cx = 150, cy = 140;
-  const r = 110;
-  // Triangular arrangement with overlapping faces
-  const points = [
-    { x: cx, y: cy - r },           // top
-    { x: cx - r * 0.87, y: cy + r * 0.5 },  // bottom-left
-    { x: cx + r * 0.87, y: cy + r * 0.5 },  // bottom-right
-    { x: cx, y: cy + r * 0.15 }              // center (inner point)
-  ];
-
-  const faces = [
-    [0, 1, 3], // top-left
-    [0, 3, 2], // top-right
-    [1, 2, 3], // bottom
-    [0, 1, 2]  // outer (background)
-  ];
-
-  const faceColors = ['var(--blue)', 'var(--blue)', 'var(--blue)', 'var(--blue)'];
-
-  let svg = `<svg width="300" height="280" viewBox="0 0 300 280">`;
-  faces.forEach((face, i) => {
-    const pts = face.map(p => `${points[p].x},${points[p].y}`).join(' ');
-    const centroid = {
-      x: face.reduce((s, p) => s + points[p].x, 0) / 3,
-      y: face.reduce((s, p) => s + points[p].y, 0) / 3
+let domainsPopulated=false;
+function populateDomains(){
+  if(domainsPopulated)return;domainsPopulated=true;
+  const tbody=document.getElementById('domain-tbody');
+  ALL_DOMAINS.forEach(d=>{
+    const r=computeR(d.x,d.y);const zone=classify(r);
+    const tr=document.createElement('tr');
+    const zc=zone==='SUBORDINATED'?'color:var(--red);background:var(--red-g)':zone==='STRUCTURAL'?'color:var(--teal);background:var(--teal-g)':'color:var(--gold);background:var(--gold-g)';
+    tr.innerHTML=`<td>${d.domain}</td><td style="font-family:var(--font-m);font-size:12px">${d.x}</td><td style="font-family:var(--font-m);font-size:12px">${d.y}</td><td style="font-family:var(--font-m);font-size:12px">${r.toFixed(4)}</td><td><span class="domain-badge" style="${zc}">${zone}</span></td><td style="font-size:12px;color:var(--text-m)">${d.path}</td>`;
+    tr.onclick=()=>{
+      document.getElementById('inp-x').value=d.x;document.getElementById('inp-y').value=d.y;
+      document.getElementById('inp-x-desc').value='constrained partition';document.getElementById('inp-y-desc').value='dominant partition';
+      document.getElementById('inp-source').value='blueprint-2026';document.getElementById('inp-domain').value='';
+      showEnginePanel('e-compute');document.querySelector('.engine-tab').click();
     };
-    svg += `<polygon points="${pts}" class="tetra-face" stroke="var(--blue)"
-      fill="rgba(26,63,192,0.05)" onclick="selectFace(${i}, ${faceValues[i]})" />`;
-    svg += `<text x="${centroid.x}" y="${centroid.y + 6}" text-anchor="middle"
-      class="tetra-num" fill="var(--blue)" onclick="selectFace(${i}, ${faceValues[i]})">${faceValues[i]}</text>`;
-
-    logPlot(2, sessionX, faceValues[i] / 100, faceValues[i], sessionColor);
-  });
-  svg += `</svg>`;
-  container.innerHTML = svg;
-  showLayer('layer2dice');
-}
-
-function selectFace(index, value) {
-  sessionY = value / 100;
-  logPlot(2, sessionX, sessionY, value, sessionColor);
-
-  // Constellation names
-  const constellations = [
-    { name: 'Fire', subtitle: 'Activation, Rupture', color: '#e05533' },
-    { name: 'Water', subtitle: 'Probability, Flow', color: '#3366cc' },
-    { name: 'Earth', subtitle: 'Structure, Foundation', color: '#c9a84c' },
-    { name: 'Air', subtitle: 'Perception, Signal', color: '#88ccdd' }
-  ];
-
-  const c = constellations[index];
-  const fortune = randomFortune();
-
-  // Generate constellation stars
-  const starCount = rand(6, 8);
-  const stars = [];
-  for (let i = 0; i < starCount; i++) {
-    stars.push({ x: 80 + Math.random() * 160, y: 40 + Math.random() * 140 });
-  }
-
-  let svg = `<svg width="320" height="220" viewBox="0 0 320 220">`;
-  // Lines connecting nearby stars
-  for (let i = 0; i < stars.length; i++) {
-    for (let j = i + 1; j < stars.length; j++) {
-      const d = Math.hypot(stars[i].x - stars[j].x, stars[i].y - stars[j].y);
-      if (d < 100) {
-        svg += `<line x1="${stars[i].x}" y1="${stars[i].y}" x2="${stars[j].x}" y2="${stars[j].y}"
-          class="constellation-line" style="color:${c.color}" />`;
-      }
-    }
-  }
-  stars.forEach(s => {
-    svg += `<circle cx="${s.x}" cy="${s.y}" r="3" class="constellation-star" style="color:${c.color}" />`;
-  });
-  svg += `</svg>`;
-
-  document.getElementById('constellationSvg').innerHTML = svg;
-  document.getElementById('constellationName').textContent = `${c.name} — ${c.subtitle}`;
-  document.getElementById('constellationName').style.color = c.color;
-  document.getElementById('constellationFortune').textContent = fortune.text;
-  document.getElementById('constellationCoord').textContent = `(${sessionX.toFixed(4)}, ${sessionY.toFixed(4)})`;
-
-  logPlot(3, sessionX, sessionY, value, sessionColor);
-  showLayer('layer3constellation');
-}
-
-// ═══════════════════════════════════════════
-// LAYER 4 — THE FIELD
-// ═══════════════════════════════════════════
-let lineChartInstance = null;
-let scatterChartInstance = null;
-
-function goToField() {
-  // Update session counts
-  if (sessionColor === 'red') DATA.red_count++;
-  else DATA.blue_count++;
-  DATA.sessions++;
-  saveData();
-
-  showLayer('layer4');
-  renderLineChart();
-  renderHeptagon();
-  renderScatterChart();
-  updateStats();
-}
-
-function renderLineChart() {
-  const ctx = document.getElementById('lineChart').getContext('2d');
-  if (lineChartInstance) lineChartInstance.destroy();
-
-  // Build running red/blue counts per plot
-  let rc = 0, bc = 0;
-  const redLine = [], blueLine = [], labels = [];
-  DATA.plots.forEach((p, i) => {
-    if (p.color === 'red') rc++; else bc++;
-    redLine.push(rc);
-    blueLine.push(bc);
-    labels.push(i + 1);
-  });
-
-  lineChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Red', data: redLine, borderColor: '#c0281a', borderWidth: 1.5, pointRadius: 0, tension: 0.3 },
-        { label: 'Blue', data: blueLine, borderColor: '#1a3fc0', borderWidth: 1.5, pointRadius: 0, tension: 0.3 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: true,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { display: true, grid: { color: 'rgba(237,232,224,.05)' }, ticks: { color: 'rgba(237,232,224,.3)', maxTicksLimit: 6, font: { size: 9 } } },
-        y: { display: true, grid: { color: 'rgba(237,232,224,.05)' }, ticks: { color: 'rgba(237,232,224,.3)', font: { size: 9 } } }
-      }
-    }
+    tbody.appendChild(tr);
   });
 }
 
-function renderHeptagon() {
-  const svg = document.getElementById('heptagonSvg');
-  const cx = 110, cy = 110, r = 85;
-  let path = '';
-  const pts = [];
-  for (let i = 0; i < 7; i++) {
-    const angle = (Math.PI * 2 * i / 7) - Math.PI / 2;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    pts.push({ x, y });
-    path += (i === 0 ? 'M' : 'L') + `${x},${y}`;
-  }
-  path += 'Z';
-
-  // Hand angle: advance by 360/7 per session
-  const handAngle = ((DATA.sessions % 7) * (360 / 7)) - 90;
-  const handRad = handAngle * Math.PI / 180;
-  const hx = cx + (r - 10) * Math.cos(handRad);
-  const hy = cy + (r - 10) * Math.sin(handRad);
-  const handColor = sessionColor === 'red' ? 'var(--red)' : 'var(--blue)';
-
-  svg.innerHTML = `
-    <path d="${path}" fill="none" stroke="rgba(237,232,224,.15)" stroke-width="1"/>
-    <line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="${handColor}" stroke-width="2.5" stroke-linecap="round"/>
-    <circle cx="${cx}" cy="${cy}" r="4" fill="${handColor}"/>
-  `;
-
-  document.getElementById('heptaLabel').textContent = `Session ${DATA.sessions}`;
-  document.getElementById('heptaCoord').textContent = `(${sessionX.toFixed(4)}, ${sessionY.toFixed(4)})`;
-}
-
-function renderScatterChart() {
-  const ctx = document.getElementById('scatterChart').getContext('2d');
-  if (scatterChartInstance) scatterChartInstance.destroy();
-
-  const redPts = [], bluePts = [];
-  DATA.plots.forEach(p => {
-    // Apply sine-wave envelope for DNA/hourglass shape
-    const envY = Math.sin(p.x * Math.PI) * p.y;
-    const point = { x: p.x, y: envY };
-    if (p.color === 'red') redPts.push(point);
-    else bluePts.push(point);
-  });
-
-  scatterChartInstance = new Chart(ctx, {
-    type: 'scatter',
-    data: {
-      datasets: [
-        { label: 'Red', data: redPts, backgroundColor: 'rgba(192,40,26,.6)', pointRadius: 2.5 },
-        { label: 'Blue', data: bluePts, backgroundColor: 'rgba(26,63,192,.6)', pointRadius: 2.5 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: true,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { display: true, grid: { color: 'rgba(237,232,224,.05)' }, ticks: { color: 'rgba(237,232,224,.3)', font: { size: 9 } } },
-        y: { display: true, grid: { color: 'rgba(237,232,224,.05)' }, ticks: { color: 'rgba(237,232,224,.3)', font: { size: 9 } } }
-      }
-    }
-  });
-}
-
-function updateStats() {
-  document.getElementById('statRed').textContent = DATA.red_count;
-  document.getElementById('statBlue').textContent = DATA.blue_count;
-  document.getElementById('statPlots').textContent = DATA.plot_total;
-  document.getElementById('statSessions').textContent = DATA.sessions;
-}
-
-// ═══════════════════════════════════════════
-// BOOK TEST
-// ═══════════════════════════════════════════
-function openBook() {
-  const page = rand(1, 5000);
-  document.getElementById('bookPage').textContent = page;
-
-  let zone = '';
-  if (page >= 360 && page <= 365) {
-    zone = 'Clock zone · P = 6/5000 = 0.0012';
-  } else if (page === 7) {
-    zone = 'The wind · P = 1/5000 = 0.0002';
-  } else if (page >= 278 && page <= 827) {
-    zone = 'Navigator zone · P = 550/5000 = 0.11';
-  } else if (page === 5000) {
-    zone = 'Final coordinate · P = 2.9 × 10⁻²⁰ (proven)';
-  } else {
-    zone = 'General field · P = 1/5000 = 0.0002';
-  }
-  document.getElementById('bookZone').textContent = zone;
-
-  DATA.book_opens.push({ page, zone, timestamp: Date.now(), session: DATA.sessions });
-  logPlot(4, page / 5000, sessionY, page, sessionColor);
-}
-
-// ═══════════════════════════════════════════
-// RESTART
-// ═══════════════════════════════════════════
-function restartSession() {
-  DATA.swap_state = !DATA.swap_state;
-  saveData();
-
-  coinFlipped = false;
-  spinCount = 0;
-  spinValues = [];
-  usedFortunes.clear();
-  sessionX = 0;
-  sessionY = 0;
-  currentRoute = '';
-
-  // Reset coin display
-  document.getElementById('leftValue').innerHTML = '&nbsp;';
-  document.getElementById('rightValue').innerHTML = '&nbsp;';
-  document.getElementById('leftCoin').style.transform = '';
-  document.getElementById('rightCoin').style.transform = '';
-  document.getElementById('leftCoin').style.transition = '';
-  document.getElementById('rightCoin').style.transition = '';
-  document.getElementById('coinHint').textContent = 'tap a coin to begin';
-  document.getElementById('coinHint').style.color = '';
-
-  initCoins();
-  showLayer('layer0');
-}
-
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
-initCoins();
+// ── INIT ──
+calculate();startClock();showSeason(getCurrentSeason());
 </script>
 </body>
 </html>
