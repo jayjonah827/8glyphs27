@@ -1,0 +1,190 @@
+# Research Binaries Relocation Manifest
+
+Moved root-level research artifacts to `/Users/jayjonah/8glyphs27-unified/references/research_binaries` for runtime hygiene.
+
+- Total moved: 162
+- Total removed junk/cache/stubs: 18
+
+## Moved Files
+- `Sociological Approaches to Big Data _ Sociology _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Sociological Approaches to Big Data _ Sociology _ Research Starters _ EBSCO Research.pdf`
+- `GLYPH_DT_MASTER_INDEX_v3_2026-04-03.docx` -> `references/research_binaries/GLYPH_DT_MASTER_INDEX_v3_2026-04-03.docx`
+- `Discrete event simulation (DES) _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Discrete event simulation (DES) _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `Visual Sociology _ Sociology _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Visual Sociology _ Sociology _ Research Starters _ EBSCO Research.pdf`
+- `The K(t) Formula and Patent Claims.pdf` -> `references/research_binaries/The K(t) Formula and Patent Claims.pdf`
+- `Numbers _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Numbers _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `patent_fig_12.png` -> `references/research_binaries/patent_fig_12.png`
+- `patent_fig_06.png` -> `references/research_binaries/patent_fig_06.png`
+- `From_Symbols_to_Society.pdf` -> `references/research_binaries/From_Symbols_to_Society.pdf`
+- `03_DATASET_REGISTRY.docx` -> `references/research_binaries/03_DATASET_REGISTRY.docx`
+- `2026-04-01T194107-0700.pdf` -> `references/research_binaries/2026-04-01T194107-0700.pdf`
+- `Statistics - Wikipedia.pdf` -> `references/research_binaries/Statistics - Wikipedia.pdf`
+- `patent_fig_07.png` -> `references/research_binaries/patent_fig_07.png`
+- `PROVISIONAL_PATENT_CONSOLIDATED_2026-03-27.pages` -> `references/research_binaries/PROVISIONAL_PATENT_CONSOLIDATED_2026-03-27.pages`
+- `01_MASTER_CLAIMS_INDEX.pages` -> `references/research_binaries/01_MASTER_CLAIMS_INDEX.pages`
+- `Heyer_Livin_Math_Extraction_Committee_Replication.docx` -> `references/research_binaries/Heyer_Livin_Math_Extraction_Committee_Replication.docx`
+- `NotebookLM.pdf` -> `references/research_binaries/NotebookLM.pdf`
+- `PROVISIONAL_PATENT_CONSOLIDATED_2026-03-27 3.pages` -> `references/research_binaries/PROVISIONAL_PATENT_CONSOLIDATED_2026-03-27 3.pages`
+- `REST API endpoints for artifact metadata - GitHub Docs.pdf` -> `references/research_binaries/REST API endpoints for artifact metadata - GitHub Docs.pdf`
+- `patent_figures_04052026.pdf` -> `references/research_binaries/patent_figures_04052026.pdf`
+- `Social Location Constraint Mapping (SLCM).pdf` -> `references/research_binaries/Social Location Constraint Mapping (SLCM).pdf`
+- `patent_fig_05.png` -> `references/research_binaries/patent_fig_05.png`
+- `Number and operations in society _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Number and operations in society _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `patent_fig_11.png` -> `references/research_binaries/patent_fig_11.png`
+- `FIG_4_zone_framework.png` -> `references/research_binaries/FIG_4_zone_framework.png`
+- `patent_fig_10.png` -> `references/research_binaries/patent_fig_10.png`
+- `patent_fig_04.png` -> `references/research_binaries/patent_fig_04.png`
+- `GLYPH_PATENT_FILING_CONSOLIDATION_GUIDE.docx` -> `references/research_binaries/GLYPH_PATENT_FILING_CONSOLIDATION_GUIDE.docx`
+- `Glyph_Simulation_Method_v1.docx` -> `references/research_binaries/Glyph_Simulation_Method_v1.docx`
+- `Factorization_ Difference of Squares _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Factorization_ Difference of Squares _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `PROVISIONAL_PATENT_APPLICATION_Glyph_Constraint_System.docx` -> `references/research_binaries/PROVISIONAL_PATENT_APPLICATION_Glyph_Constraint_System.docx`
+- `Unified Research and Technical Report_ The K(t) Framework and the 39% Structural Constant.xlsx` -> `references/research_binaries/Unified Research and Technical Report_ The K(t) Framework and the 39% Structural Constant.xlsx`
+- `FINAL_PATENT_PACKET_2026-04-05.docx` -> `references/research_binaries/FINAL_PATENT_PACKET_2026-04-05.docx`
+- `PROVISIONAL_PATENT_APPLICATION_Glyph_Constraint_System.pages` -> `references/research_binaries/PROVISIONAL_PATENT_APPLICATION_Glyph_Constraint_System.pages`
+- `09_Master_Data_Summary.pdf` -> `references/research_binaries/09_Master_Data_Summary.pdf`
+- `correlation_model.docx` -> `references/research_binaries/correlation_model.docx`
+- `Probability _ History _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Probability _ History _ Research Starters _ EBSCO Research.pdf`
+- `01_MASTER_CLAIMS_INDEX.docx` -> `references/research_binaries/01_MASTER_CLAIMS_INDEX.docx`
+- `Heyer_Livin_Cultural_Intelligence_Article.docx` -> `references/research_binaries/Heyer_Livin_Cultural_Intelligence_Article.docx`
+- `Jonah Study — Patent Method Replication Guide.pdf` -> `references/research_binaries/Jonah Study — Patent Method Replication Guide.pdf`
+- `patent_fig_01.png` -> `references/research_binaries/patent_fig_01.png`
+- `GLYPH_ALL_DISTRIBUTION_TABLES_2026-03-30.numbers` -> `references/research_binaries/GLYPH_ALL_DISTRIBUTION_TABLES_2026-03-30.numbers`
+- `Glyph_System_Prior_Art_Equations.gcx` -> `references/research_binaries/Glyph_System_Prior_Art_Equations.gcx`
+- `PATENT_VARIABLE_MAPPING_StatsVsKt_2026-04-03.docx` -> `references/research_binaries/PATENT_VARIABLE_MAPPING_StatsVsKt_2026-04-03.docx`
+- `05_TERMINOLOGY_LOCKFILE.docx` -> `references/research_binaries/05_TERMINOLOGY_LOCKFILE.docx`
+- `7heye8glyph2 EVENT+(RECOGNITIONxAUTONOMY)=Artifacts.pdf` -> `references/research_binaries/7heye8glyph2 EVENT+(RECOGNITIONxAUTONOMY)=Artifacts.pdf`
+- `PROVISIONAL_APPLICATION_COMPLETE_2026-04-06.pdf` -> `references/research_binaries/PROVISIONAL_APPLICATION_COMPLETE_2026-04-06.pdf`
+- `Stochastic Processes _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Stochastic Processes _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `FIG_9_cross_dataset_comparison.png` -> `references/research_binaries/FIG_9_cross_dataset_comparison.png`
+- `PATENT_FIGURES_2026-04-06.pdf` -> `references/research_binaries/PATENT_FIGURES_2026-04-06.pdf`
+- `Heyer_Livin_Math_Extraction_Committee_Replication.pages` -> `references/research_binaries/Heyer_Livin_Math_Extraction_Committee_Replication.pages`
+- `patent_fig_03.png` -> `references/research_binaries/patent_fig_03.png`
+- `Numerical Analysis _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Numerical Analysis _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `patent_fig_02.png` -> `references/research_binaries/patent_fig_02.png`
+- `patent:research portfolio.zip` -> `references/research_binaries/patent:research portfolio.zip`
+- `Free Software Directory meeting on IRC_ Friday, April 3, starting at 12_00 EDT (16_00 UTC) — Free Software Foundation — Working together for free software.pdf` -> `references/research_binaries/Free Software Directory meeting on IRC_ Friday, April 3, starting at 12_00 EDT (16_00 UTC) — Free Software Foundation — Working together for free software.pdf`
+- `Mar 19, 2026 dated for Legal Protection.pdf` -> `references/research_binaries/Mar 19, 2026 dated for Legal Protection.pdf`
+- `prompt for documents.pdf` -> `references/research_binaries/prompt for documents.pdf`
+- `2026-03-27T21:33:40Z.pdf` -> `references/research_binaries/2026-03-27T21:33:40Z.pdf`
+- `The Jonah Study — Full Convergence Proof.pdf` -> `references/research_binaries/The Jonah Study — Full Convergence Proof.pdf`
+- `ChoiceIsNotChance_MathAppendix_AllEquations.docx` -> `references/research_binaries/ChoiceIsNotChance_MathAppendix_AllEquations.docx`
+- `2026-03-30T16:24:05Z.pdf` -> `references/research_binaries/2026-03-30T16:24:05Z.pdf`
+- `PATENT_RECONCILIATION_AUDIT_2026-04-06.docx` -> `references/research_binaries/PATENT_RECONCILIATION_AUDIT_2026-04-06.docx`
+- `Mathematics Genealogy Project (MGP) _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Mathematics Genealogy Project (MGP) _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `Wikifunctions_Catalogue_Logic operators - Wikifunctions.pdf` -> `references/research_binaries/Wikifunctions_Catalogue_Logic operators - Wikifunctions.pdf`
+- `NotebookLM l.pdf` -> `references/research_binaries/NotebookLM l.pdf`
+- `Discoveries of Archimedes _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Discoveries of Archimedes _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `JonahStudy_ResearchDocument.pages` -> `references/research_binaries/JonahStudy_ResearchDocument.pages`
+- `JonahStudy_ConvergenceProof.png` -> `references/research_binaries/JonahStudy_ConvergenceProof.png`
+- `Wikifunctions_Catalogue_Scientific functions - Wikifunctions.pdf` -> `references/research_binaries/Wikifunctions_Catalogue_Scientific functions - Wikifunctions.pdf`
+- `I meed to patent more than the game. the game is for money, I need to patient the equation and the mathematic code, I intended to prove monetary constraints were the reason racism was effecting my life in negative ways bc at the start I was gett.pdf` -> `references/research_binaries/I meed to patent more than the game. the game is for money, I need to patient the equation and the mathematic code, I intended to prove monetary constraints were the reason racism was effecting my life in negative ways bc at the start I was gett.pdf`
+- `FIG_12_reproducibility_framework.png` -> `references/research_binaries/FIG_12_reproducibility_framework.png`
+- `05_Convergence_Proof.pdf` -> `references/research_binaries/05_Convergence_Proof.pdf`
+- `GLYPH DT_2026-03-30.numbers` -> `references/research_binaries/GLYPH DT_2026-03-30.numbers`
+- `GLYPH_DT_MASTER_INDEX_2026-04-03.docx` -> `references/research_binaries/GLYPH_DT_MASTER_INDEX_2026-04-03.docx`
+- `Market research.pdf` -> `references/research_binaries/Market research.pdf`
+- `GLYPH DT_2026-03-30.xlsx` -> `references/research_binaries/GLYPH DT_2026-03-30.xlsx`
+- `Field Data Collection _ Sociology _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Field Data Collection _ Sociology _ Research Starters _ EBSCO Research.pdf`
+- `fricative - Wiktionary, the free dictionary.pdf` -> `references/research_binaries/fricative - Wiktionary, the free dictionary.pdf`
+- `Wikifunctions - Meta-Wiki.pdf` -> `references/research_binaries/Wikifunctions - Meta-Wiki.pdf`
+- `Distribution (mathematics) _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Distribution (mathematics) _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `GLYPH_DT_MASTER_INDEX_v2_2026-04-03.docx` -> `references/research_binaries/GLYPH_DT_MASTER_INDEX_v2_2026-04-03.docx`
+- `Consumer Behavior _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Consumer Behavior _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `DECK_2_Statistical_Instructional_Article.pages` -> `references/research_binaries/DECK_2_Statistical_Instructional_Article.pages`
+- `Space-time Distortion By Gravity _ Physics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Space-time Distortion By Gravity _ Physics _ Research Starters _ EBSCO Research.pdf`
+- `FIG_7_record_layout.png` -> `references/research_binaries/FIG_7_record_layout.png`
+- `2026-01-05T17:49:44Z.pdf` -> `references/research_binaries/2026-01-05T17:49:44Z.pdf`
+- `Glyph Event Record Architecture.pdf` -> `references/research_binaries/Glyph Event Record Architecture.pdf`
+- `FIG_2_partition_construction.png` -> `references/research_binaries/FIG_2_partition_construction.png`
+- `PATENT_FIGURES_CLEAN_2026-04-06.pdf` -> `references/research_binaries/PATENT_FIGURES_CLEAN_2026-04-06.pdf`
+- `GLYPH_DT_2026-03-30.xlsx.pdf` -> `references/research_binaries/GLYPH_DT_2026-03-30.xlsx.pdf`
+- `Computational Sociology _ Sociology _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Computational Sociology _ Sociology _ Research Starters _ EBSCO Research.pdf`
+- `04_REPLICATION_LEDGER 2.pages` -> `references/research_binaries/04_REPLICATION_LEDGER 2.pages`
+- `What ships first Family Transmission Calculator, April 1..pdf` -> `references/research_binaries/What ships first Family Transmission Calculator, April 1..pdf`
+- `Math Extraction and Committee Replication Guide.pdf` -> `references/research_binaries/Math Extraction and Committee Replication Guide.pdf`
+- `structural_constraint_fig10.png` -> `references/research_binaries/structural_constraint_fig10.png`
+- `Numerical Data Presentation _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Numerical Data Presentation _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `Concept Analysis _ Social Sciences and Humanities _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Concept Analysis _ Social Sciences and Humanities _ Research Starters _ EBSCO Research.pdf`
+- `FIG_6_event_record_architecture.png` -> `references/research_binaries/FIG_6_event_record_architecture.png`
+- `Collection_SaaSS - Free Software Directory.pdf` -> `references/research_binaries/Collection_SaaSS - Free Software Directory.pdf`
+- `FIG_10_output_interface.png` -> `references/research_binaries/FIG_10_output_interface.png`
+- `Neurosociology _ Sociology _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Neurosociology _ Sociology _ Research Starters _ EBSCO Research.pdf`
+- `Heyer LivinMathematical Extraction and Replication Appendix.pdf` -> `references/research_binaries/Heyer LivinMathematical Extraction and Replication Appendix.pdf`
+- `FIG_8_validation_pipeline.png` -> `references/research_binaries/FIG_8_validation_pipeline.png`
+- `01_MISSION_AND_SCOPE.pdf` -> `references/research_binaries/01_MISSION_AND_SCOPE.pdf`
+- `04_REPLICATION_LEDGER.docx` -> `references/research_binaries/04_REPLICATION_LEDGER.docx`
+- `FIG_1_system_architecture.png` -> `references/research_binaries/FIG_1_system_architecture.png`
+- `CLAIMS.docx` -> `references/research_binaries/CLAIMS.docx`
+- `Schemas - Schema.org.pdf` -> `references/research_binaries/Schemas - Schema.org.pdf`
+- `Overview of the GNU System - GNU Project - Free Software Foundation.pdf` -> `references/research_binaries/Overview of the GNU System - GNU Project - Free Software Foundation.pdf`
+- `nonbinary_state_sweep_plot.png` -> `references/research_binaries/nonbinary_state_sweep_plot.png`
+- `Gravity _ History _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Gravity _ History _ Research Starters _ EBSCO Research.pdf`
+- `26-4-5 - Computer Implemented Method For Classifying An Empirical Distribution - Figs (1).key` -> `references/research_binaries/26-4-5 - Computer Implemented Method For Classifying An Empirical Distribution - Figs (1).key`
+- `08_Cultural_Intelligence_Framework.pdf` -> `references/research_binaries/08_Cultural_Intelligence_Framework.pdf`
+- `Permutations and combinations _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Permutations and combinations _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `RESEARCH_PARTNER_MEMO_Patent_Assessment.docx` -> `references/research_binaries/RESEARCH_PARTNER_MEMO_Patent_Assessment.docx`
+- `Organization Development _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Organization Development _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `FIG_3_ratio_classification.png` -> `references/research_binaries/FIG_3_ratio_classification.png`
+- `FIG_11_input_families.png` -> `references/research_binaries/FIG_11_input_families.png`
+- `Understanding PII in Google's contracts and policies - Analytics Help.pdf` -> `references/research_binaries/Understanding PII in Google's contracts and policies - Analytics Help.pdf`
+- `Web design _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Web design _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `jonah_study_heyer_livin.docx.pdf` -> `references/research_binaries/jonah_study_heyer_livin.docx.pdf`
+- `02_FORMULA_AUTHORITY_SHEET.docx` -> `references/research_binaries/02_FORMULA_AUTHORITY_SHEET.docx`
+- `Glyph_Simulation_Method_v1 (1).docx` -> `references/research_binaries/Glyph_Simulation_Method_v1 (1).docx`
+- `Cultural Intelligence Framework.pdf` -> `references/research_binaries/Cultural Intelligence Framework.pdf`
+- `06_Math_Extraction_Committee_Replication.pdf` -> `references/research_binaries/06_Math_Extraction_Committee_Replication.pdf`
+- `Chebyshev's inequality _ Mathematics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Chebyshev's inequality _ Mathematics _ Research Starters _ EBSCO Research.pdf`
+- `Glyph-Q Quantum Constraint Specification.pdf` -> `references/research_binaries/Glyph-Q Quantum Constraint Specification.pdf`
+- `NotebookLM a.pdf` -> `references/research_binaries/NotebookLM a.pdf`
+- `Evidence_Based_Operational_Improvements_JValley_Feb2026.pdf` -> `references/research_binaries/Evidence_Based_Operational_Improvements_JValley_Feb2026.pdf`
+- `CF-Documentation-Final-20200921.pdf` -> `references/research_binaries/CF-Documentation-Final-20200921.pdf`
+- `nonbinary_360state_plot.png` -> `references/research_binaries/nonbinary_360state_plot.png`
+- `04_Kt_Formula_And_Claims.pdf` -> `references/research_binaries/04_Kt_Formula_And_Claims.pdf`
+- `DEFINITIONS.docx` -> `references/research_binaries/DEFINITIONS.docx`
+- `10_GlyphQ_Quantum_Specification.pdf` -> `references/research_binaries/10_GlyphQ_Quantum_Specification.pdf`
+- `Heyer_Livin_Cultural_Intelligence_Deck.pptx` -> `references/research_binaries/Heyer_Livin_Cultural_Intelligence_Deck.pptx`
+- `Gap Analysis _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Gap Analysis _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `Graphemics - Wikipedia.pdf` -> `references/research_binaries/Graphemics - Wikipedia.pdf`
+- `View source for Module_TableTools - Wikipedia.pdf` -> `references/research_binaries/View source for Module_TableTools - Wikipedia.pdf`
+- `Wikipedia, the free encyclopedia.pdf` -> `references/research_binaries/Wikipedia, the free encyclopedia.pdf`
+- `Morphophonology - Wikipedia.pdf` -> `references/research_binaries/Morphophonology - Wikipedia.pdf`
+- `PATENT_VARIABLE_MAPPING_INTEGRATED_2026-04-03.docx` -> `references/research_binaries/PATENT_VARIABLE_MAPPING_INTEGRATED_2026-04-03.docx`
+- `Social Movement Theory_ Structural Strain Theory _ Sociology _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Social Movement Theory_ Structural Strain Theory _ Sociology _ Research Starters _ EBSCO Research.pdf`
+- `Special Relativity _ Physics _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Special Relativity _ Physics _ Research Starters _ EBSCO Research.pdf`
+- `05_TERMINOLOGY_LOCKFILE.pages` -> `references/research_binaries/05_TERMINOLOGY_LOCKFILE.pages`
+- `patent_fig_09.png` -> `references/research_binaries/patent_fig_09.png`
+- `patent_fig_08.png` -> `references/research_binaries/patent_fig_08.png`
+- `EXTRACTION_INTO_THE_SYSTEM.docx` -> `references/research_binaries/EXTRACTION_INTO_THE_SYSTEM.docx`
+- `nonbinary_nonlinear_test.png` -> `references/research_binaries/nonbinary_nonlinear_test.png`
+- `00_FOLDER_INDEX.pdf` -> `references/research_binaries/00_FOLDER_INDEX.pdf`
+- `GLYPH_DT_2026-03-30.xlsx` -> `references/research_binaries/GLYPH_DT_2026-03-30.xlsx`
+- `Ratio Analysis _ Business and Management _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Ratio Analysis _ Business and Management _ Research Starters _ EBSCO Research.pdf`
+- `vocabs.SOURCE CODE.pdf` -> `references/research_binaries/vocabs.SOURCE CODE.pdf`
+- `07_Glyph_Event_Record_Architecture.pdf` -> `references/research_binaries/07_Glyph_Event_Record_Architecture.pdf`
+- `The_Geometry_of_Memory.pdf` -> `references/research_binaries/The_Geometry_of_Memory.pdf`
+- `GLYPH_SNT_DATA_TABLE_2026-03-27.xlsx` -> `references/research_binaries/GLYPH_SNT_DATA_TABLE_2026-03-27.xlsx`
+- `binary_scaling_shape.png` -> `references/research_binaries/binary_scaling_shape.png`
+- `Free Software Directory_Participate_Project Team - Free Software Directory.pdf` -> `references/research_binaries/Free Software Directory_Participate_Project Team - Free Software Directory.pdf`
+- `patent_figures_04052026.zip` -> `references/research_binaries/patent_figures_04052026.zip`
+- `ChoiceIsNotChance_FullConvergence_AllData.png.pdf` -> `references/research_binaries/ChoiceIsNotChance_FullConvergence_AllData.png.pdf`
+- `FIG_5_mapping_protocol.png` -> `references/research_binaries/FIG_5_mapping_protocol.png`
+- `Momentum (physics) _ Engineering _ Research Starters _ EBSCO Research.pdf` -> `references/research_binaries/Momentum (physics) _ Engineering _ Research Starters _ EBSCO Research.pdf`
+
+## Removed Junk/Cache/Stubs
+- `lu1901yqg95.tmp`
+- `.~lock.FINAL_PATENT_PACKET_2026-04-05.pdf#`
+- `__pycache______init__.cpython-310.pyc`
+- `__init__.cpython-310.pyc`
+- `GLYPH8/__pycache__/downloads_extractor.cpython-314.pyc`
+- `GLYPH8/__pycache__/server.cpython-314.pyc`
+- `GLYPH8/__pycache__/glyph_constraint.cpython-314.pyc`
+- `GLYPH8/__pycache__/glyph_system.cpython-314.pyc`
+- `GLYPH8/__pycache__/automation.cpython-314.pyc`
+- `GLYPH8/__pycache__/`
+- `index.html`
+- `events.json`
+- `datasetA_gof_categories.csv`
+- `data/events.json`
+- `deploy/final_mark/pages/index.html`
+- `references/research_binaries/2026-01-05T17:49:44Z.pdf`
+- `GLYPH8/archive/.gitkeep`
+- `GLYPH8/intake/.gitkeep`

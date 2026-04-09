@@ -1,0 +1,4 @@
+family,band_entry_parameter,band_exit_parameter,closest_to_epsilon_parameter
+zipf_K,1.74,2.32,2.08
+exponential_K,0.82,1.24,1.06
+logistic_K,,,

@@ -1,0 +1,13 @@
+scale_ratio_k=b_over_a,transformed_value_r(k),inside_band_0.30_to_0.49
+1.0,0.5,False
+2.0,0.416667,True
+2.0448,0.414214,True
+3.0,0.375,True
+4.0,0.35,True
+5.0,0.333333,True
+6.0,0.321429,True
+7.0,0.3125,True
+8.0,0.305556,True
+9.0,0.3,True
+10.0,0.295455,False
+20.0,0.27381,False

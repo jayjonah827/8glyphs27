@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moon Phase Clock — Glyph Time</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0e14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+    color: #f5f0e8;
+    overflow: hidden;
+  }
+
+  .clock-container {
+    position: relative;
+    width: 520px;
+    height: 520px;
+    cursor: pointer;
+  }
+
+  .clock-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 40px rgba(196, 160, 82, 0.15));
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(10, 14, 20, 0.92);
+    border: 1px solid rgba(196, 160, 82, 0.4);
+    border-radius: 12px;
+    padding: 20px 28px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    min-width: 260px;
+  }
+
+  .clock-container:hover .tooltip {
+    opacity: 1;
+  }
+
+  .tooltip-time {
+    font-size: 32px;
+    font-weight: 700;
+    color: #c4a052;
+    letter-spacing: 2px;
+    line-height: 1.2;
+  }
+
+  .tooltip-date {
+    font-size: 14px;
+    color: #8faa8b;
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  .tooltip-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(196, 160, 82, 0.4);
+    margin: 12px auto;
+  }
+
+  .tooltip-phase {
+    font-size: 16px;
+    color: #f5f0e8;
+    letter-spacing: 1px;
+  }
+
+  .tooltip-phase-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .tooltip-cycle {
+    font-size: 11px;
+    color: #666;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Subtle ambient glow behind moon */
+  .moon-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 160, 82, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Bottom label */
+  .label {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<div class="clock-container" id="clockContainer">
+  <div class="moon-glow"></div>
+  <svg class="clock-svg" id="clockSvg" viewBox="0 0 520 520"></svg>
+  <div class="tooltip" id="tooltip">
+    <div class="tooltip-time" id="tooltipTime">00:00:00</div>
+    <div class="tooltip-date" id="tooltipDate">Thursday, April 2, 2026</div>
+    <div class="tooltip-divider"></div>
+    <span class="tooltip-phase-icon" id="tooltipPhaseIcon"></span>
+    <div class="tooltip-phase" id="tooltipPhase">Waxing Gibbous</div>
+    <div class="tooltip-cycle" id="tooltipCycle">Day 10.4 of 29.53</div>
+  </div>
+</div>
+
+<div class="label">synodic month &middot; 29.53059 days</div>
+
+<script>
+// ============================================================
+// MOON PHASE MATH
+// The synodic month = 29.53059 days
+// Known new moon reference: January 6, 2000 18:14 UTC
+// This is the same cycle the Egyptians tracked to invent counting.
+// ============================================================
+
+const SYNODIC_MONTH = 29.53059;
+const KNOWN_NEW_MOON = new Date(Date.UTC(2000, 0, 6, 18, 14, 0)); // Jan 6 2000 18:14 UTC
+
+function getMoonAge(date) {
+  const diffMs = date.getTime() - KNOWN_NEW_MOON.getTime();
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+  let age = diffDays % SYNODIC_MONTH;
+  if (age < 0) age += SYNODIC_MONTH;
+  return age;
+}
+
+function getMoonPhase(age) {
+  // 8 phases, each ~3.69 days
+  const p = age / SYNODIC_MONTH; // 0 to 1
+  if (p < 0.0625)  return { name: 'New Moon',         icon: '\u{1F311}', illumination: 0 };
+  if (p < 0.1875)  return { name: 'Waxing Crescent',  icon: '\u{1F312}', illumination: p };
+  if (p < 0.3125)  return { name: 'First Quarter',    icon: '\u{1F313}', illumination: p };
+  if (p < 0.4375)  return { name: 'Waxing Gibbous',   icon: '\u{1F314}', illumination: p };
+  if (p < 0.5625)  return { name: 'Full Moon',        icon: '\u{1F315}', illumination: 1 };
+  if (p < 0.6875)  return { name: 'Waning Gibbous',   icon: '\u{1F316}', illumination: 1 - p };
+  if (p < 0.8125)  return { name: 'Last Quarter',     icon: '\u{1F317}', illumination: 1 - p };
+  if (p < 0.9375)  return { name: 'Waning Crescent',  icon: '\u{1F318}', illumination: 1 - p };
+  return { name: 'New Moon', icon: '\u{1F311}', illumination: 0 };
+}
+
+// Compute illumination fraction (0=new, 1=full, back to 0)
+function getIllumination(age) {
+  const p = age / SYNODIC_MONTH;
+  // Cosine curve: 0 at new, 1 at full, 0 at new
+  return (1 - Math.cos(2 * Math.PI * p)) / 2;
+}
+
+// ============================================================
+// SVG CLOCK RENDERING
+// ============================================================
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const CX = 260, CY = 260, R = 230;
+const svg = document.getElementById('clockSvg');
+
+function svgEl(tag, attrs) {
+  const el = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  return el;
+}
+
+function polarToXY(cx, cy, r, angleDeg) {
+  const rad = (angleDeg - 90) * Math.PI / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+// -- Background
+function drawBackground() {
+  // Outer ring
+  svg.appendChild(svgEl('circle', {
+    cx: CX, cy: CY, r: R + 10,
+    fill: 'none', stroke: '#1a1f2a', 'stroke-width': 2
+  }));
+  svg.appendChild(svgEl('circle', {
+    cx: CX, cy: CY, r: R,
+    fill: 'none', stroke: 'rgba(196,160,82,0.2)', 'stroke-width': 1
+  }));
+
+  // Hour markers
+  for (let i = 0; i < 12; i++) {
+    const angle = i * 30;
+    const p1 = polarToXY(CX, CY, R - 2, angle);
+    const p2 = polarToXY(CX, CY, R - 18, angle);
+    svg.appendChild(svgEl('line', {
+      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
+      stroke: '#c4a052', 'stroke-width': 2.5, 'stroke-linecap': 'round'
+    }));
+  }
+
+  // Minute markers
+  for (let i = 0; i < 60; i++) {
+    if (i % 5 === 0) continue;
+    const angle = i * 6;
+    const p1 = polarToXY(CX, CY, R - 2, angle);
+    const p2 = polarToXY(CX, CY, R - 8, angle);
+    svg.appendChild(svgEl('line', {
+      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
+      stroke: 'rgba(196,160,82,0.25)', 'stroke-width': 1, 'stroke-linecap': 'round'
+    }));
+  }
+
+  // Hour numbers
+  for (let i = 1; i <= 12; i++) {
+    const angle = i * 30;
+    const p = polarToXY(CX, CY, R - 36, angle);
+    const text = svgEl('text', {
+      x: p.x, y: p.y + 5,
+      'text-anchor': 'middle',
+      'font-family': "'SF Mono', 'Fira Code', monospace",
+      'font-size': '16',
+      fill: 'rgba(245,240,232,0.5)',
+      'font-weight': '400'
+    });
+    text.textContent = i;
+    svg.appendChild(text);
+  }
+}
+
+// -- Moon phase disc (center)
+function drawMoonDisc(age) {
+  const moonR = 52;
+  const illumination = getIllumination(age);
+  const phase = getMoonPhase(age);
+  const isWaxing = age < SYNODIC_MONTH / 2;
+
+  // Moon background (dark side)
+  svg.appendChild(svgEl('circle', {
+    cx: CX, cy: CY, r: moonR,
+    fill: '#111419', stroke: 'rgba(196,160,82,0.15)', 'stroke-width': 0.5,
+    id: 'moonBg'
+  }));
+
+  // Illuminated portion using arc path
+  // illumination: 0 = none, 0.5 = half, 1 = full
+  if (illumination > 0.001 && illumination < 0.999) {
+    // The lit portion: we draw it as a path
+    // For waxing: right side lit. For waning: left side lit.
+    const f = illumination * 2 - 1; // -1 (new) to +1 (full)
+    const curveX = f * moonR;
+
+    let d;
+    if (isWaxing) {
+      // Right half is lit, curve controls how much of left
+      d = `M ${CX} ${CY - moonR}
+           A ${moonR} ${moonR} 0 0 1 ${CX} ${CY + moonR}
+           A ${Math.abs(curveX)} ${moonR} 0 0 ${f >= 0 ? 1 : 0} ${CX} ${CY - moonR} Z`;
+    } else {
+      // Left half is lit, curve controls how much of right
+      d = `M ${CX} ${CY - moonR}
+           A ${moonR} ${moonR} 0 0 0 ${CX} ${CY + moonR}
+           A ${Math.abs(curveX)} ${moonR} 0 0 ${f >= 0 ? 0 : 1} ${CX} ${CY - moonR} Z`;
+    }
+
+    svg.appendChild(svgEl('path', {
+      d: d,
+      fill: '#d4c48a',
+      opacity: '0.85',
+      id: 'moonLit'
+    }));
+  } else if (illumination >= 0.999) {
+    svg.appendChild(svgEl('circle', {
+      cx: CX, cy: CY, r: moonR,
+      fill: '#d4c48a', opacity: '0.85',
+      id: 'moonLit'
+    }));
+  }
+
+  // Subtle crater texture
+  const craters = [
+    { dx: -15, dy: -12, r: 6 },
+    { dx: 10, dy: -20, r: 4 },
+    { dx: 20, dy: 8, r: 7 },
+    { dx: -8, dy: 18, r: 5 },
+    { dx: 5, dy: 5, r: 3 },
+    { dx: -22, dy: 2, r: 4 },
+    { dx: 14, dy: -5, r: 3 },
+  ];
+  craters.forEach(c => {
+    svg.appendChild(svgEl('circle', {
+      cx: CX + c.dx, cy: CY + c.dy, r: c.r,
+      fill: 'none', stroke: 'rgba(196,160,82,0.08)', 'stroke-width': 0.5
+    }));
+  });
+}
+
+// -- Clock hands
+let hourHand, minuteHand, secondHand, secondDot;
+
+function createHands() {
+  // Hour hand
+  hourHand = svgEl('line', {
+    x1: CX, y1: CY, x2: CX, y2: CY - 100,
+    stroke: '#f5f0e8', 'stroke-width': 4, 'stroke-linecap': 'round',
+    id: 'hourHand'
+  });
+  svg.appendChild(hourHand);
+
+  // Minute hand
+  minuteHand = svgEl('line', {
+    x1: CX, y1: CY, x2: CX, y2: CY - 150,
+    stroke: '#f5f0e8', 'stroke-width': 2.5, 'stroke-linecap': 'round',
+    id: 'minuteHand'
+  });
+  svg.appendChild(minuteHand);
+
+  // Second hand
+  secondHand = svgEl('line', {
+    x1: CX, y1: CY + 30, x2: CX, y2: CY - 170,
+    stroke: '#c4a052', 'stroke-width': 1, 'stroke-linecap': 'round',
+    id: 'secondHand'
+  });
+  svg.appendChild(secondHand);
+
+  // Center dot
+  svg.appendChild(svgEl('circle', {
+    cx: CX, cy: CY, r: 56,
+    fill: 'none', stroke: 'rgba(196,160,82,0.1)', 'stroke-width': 0.5
+  }));
+
+  // Second hand tip dot
+  secondDot = svgEl('circle', {
+    cx: CX, cy: CY - 170, r: 3,
+    fill: '#c4a052', id: 'secondDot'
+  });
+  svg.appendChild(secondDot);
+
+  // Center pin
+  svg.appendChild(svgEl('circle', {
+    cx: CX, cy: CY, r: 4,
+    fill: '#c4a052'
+  }));
+}
+
+// -- Synodic arc (outer ring showing moon cycle progress)
+let synodicArc;
+
+function createSynodicArc() {
+  synodicArc = svgEl('circle', {
+    cx: CX, cy: CY, r: R + 6,
+    fill: 'none',
+    stroke: '#c4a052',
+    'stroke-width': 3,
+    'stroke-linecap': 'round',
+    'stroke-dasharray': `0 ${2 * Math.PI * (R + 6)}`,
+    transform: `rotate(-90 ${CX} ${CY})`,
+    opacity: '0.6',
+    id: 'synodicArc'
+  });
+  svg.appendChild(synodicArc);
+}
+
+function updateSynodicArc(age) {
+  const circumference = 2 * Math.PI * (R + 6);
+  const progress = age / SYNODIC_MONTH;
+  const dashLen = circumference * progress;
+  synodicArc.setAttribute('stroke-dasharray', `${dashLen} ${circumference - dashLen}`);
+}
+
+// ============================================================
+// UPDATE LOOP
+// ============================================================
+
+function updateClock() {
+  const now = new Date();
+  const h = now.getHours() % 12;
+  const m = now.getMinutes();
+  const s = now.getSeconds();
+  const ms = now.getMilliseconds();
+
+  // Smooth angles
+  const sAngle = (s + ms / 1000) * 6;
+  const mAngle = (m + s / 60) * 6;
+  const hAngle = (h + m / 60) * 30;
+
+  // Rotate hands
+  const hP = polarToXY(CX, CY, 100, hAngle);
+  hourHand.setAttribute('x2', hP.x);
+  hourHand.setAttribute('y2', hP.y);
+
+  const mP = polarToXY(CX, CY, 150, mAngle);
+  minuteHand.setAttribute('x2', mP.x);
+  minuteHand.setAttribute('y2', mP.y);
+
+  const sP = polarToXY(CX, CY, 170, sAngle);
+  const sTail = polarToXY(CX, CY, 30, sAngle + 180);
+  secondHand.setAttribute('x1', sTail.x);
+  secondHand.setAttribute('y1', sTail.y);
+  secondHand.setAttribute('x2', sP.x);
+  secondHand.setAttribute('y2', sP.y);
+  secondDot.setAttribute('cx', sP.x);
+  secondDot.setAttribute('cy', sP.y);
+
+  // Moon phase
+  const age = getMoonAge(now);
+  const phase = getMoonPhase(age);
+  const illum = getIllumination(age);
+
+  // Update tooltip
+  const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  document.getElementById('tooltipTime').textContent = timeStr;
+  document.getElementById('tooltipDate').textContent = dateStr;
+  document.getElementById('tooltipPhaseIcon').textContent = phase.icon;
+  document.getElementById('tooltipPhase').textContent = phase.name;
+  document.getElementById('tooltipCycle').textContent =
+    `Day ${age.toFixed(1)} of ${SYNODIC_MONTH} · ${(illum * 100).toFixed(1)}% illuminated`;
+
+  // Update synodic arc
+  updateSynodicArc(age);
+
+  requestAnimationFrame(updateClock);
+}
+
+// Rebuild moon disc periodically (every 60s is fine, phase barely changes)
+function rebuildMoon() {
+  const old = document.getElementById('moonBg');
+  if (old) {
+    // Remove moon elements
+    ['moonBg', 'moonLit'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
+  }
+  const age = getMoonAge(new Date());
+  // Insert moon before hands
+  const handEl = document.getElementById('hourHand');
+  const moonEls = [];
+
+  // We need to rebuild — easier to just clear and redraw
+  // But to avoid flicker, let's just update on init and every minute
+  drawMoonDisc(age);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+
+function init() {
+  drawBackground();
+  createSynodicArc();
+  drawMoonDisc(getMoonAge(new Date()));
+  createHands();
+  updateClock();
+
+  // Rebuild moon disc every 60 seconds
+  setInterval(() => {
+    // Remove old moon
+    const els = svg.querySelectorAll('#moonBg, #moonLit');
+    els.forEach(el => el.remove());
+
+    // Reinsert before hands
+    const hourEl = document.getElementById('hourHand');
+    const tempSvg = document.createDocumentFragment();
+
+    // Rebuild: we need to insert before hands
+    // Simplest: remove hands, draw moon, re-add hands
+    const hands = ['hourHand', 'minuteHand', 'secondHand', 'secondDot'].map(id => {
+      const el = document.getElementById(id);
+      el.remove();
+      return el;
+    });
+    // Also remove center pin (last circle)
+    const allCircles = svg.querySelectorAll('circle');
+    const pin = allCircles[allCircles.length - 1];
+    if (pin && pin.getAttribute('r') === '4') pin.remove();
+
+    drawMoonDisc(getMoonAge(new Date()));
+    hands.forEach(el => svg.appendChild(el));
+    svg.appendChild(svgEl('circle', { cx: CX, cy: CY, r: 4, fill: '#c4a052' }));
+  }, 60000);
+}
+
+init();
+</script>
+</body>
+</html>

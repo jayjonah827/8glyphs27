@@ -5,3 +5,13 @@ __pycache__/
 *.swp
 *.swo
 *~
+*.pdf
+*.zip
+*.tar.gz
+*.dmg
+.env
+.env.*
+!.env.template
+.venv/
+venv/
+.pytest_cache/

@@ -1,0 +1,387 @@
+/* ============================================
+   HEYER LIVIN' — RESEARCH PORTAL
+   Typography: Permanent Marker / Brush Script MT / Helvetica
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+:root {
+  --black: #0a0a0a;
+  --white: #f5f5f0;
+  --gold: #c4a035;
+  --gold-light: #e8d48b;
+  --charcoal: #1a1a1a;
+  --smoke: #2a2a2a;
+  --zone-sub: #c0392b;
+  --zone-struct: #d4a017;
+  --zone-dom: #27ae60;
+  --border: #333;
+  --text-dim: #888;
+  --eq-font: 'Permanent Marker', cursive;
+  --sub-font: 'Brush Script MT', 'Brush Script Std', 'Segoe Script', cursive;
+  --body-font: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--body-font);
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+h1, h2, .equation, .kt-value, .stat-number {
+  font-family: var(--eq-font);
+}
+
+h3, h4, .subheader, .section-label, nav a {
+  font-family: var(--sub-font);
+  font-weight: normal;
+}
+
+h1 { font-size: 3.5rem; letter-spacing: 2px; color: var(--gold); }
+h2 { font-size: 2.2rem; color: var(--gold-light); margin-bottom: 1rem; }
+h3 { font-size: 2rem; color: var(--white); }
+h4 { font-size: 1.6rem; color: var(--gold); }
+p { font-size: 1.05rem; margin-bottom: 1rem; color: #ccc; }
+a { color: var(--gold); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--gold-light); }
+
+.equation {
+  font-size: 2.8rem;
+  color: var(--gold);
+  text-align: center;
+  padding: 2rem 0;
+  letter-spacing: 3px;
+}
+
+.equation-sm {
+  font-family: var(--eq-font);
+  font-size: 1.4rem;
+  color: var(--gold-light);
+}
+
+/* ---------- NAVIGATION ---------- */
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .brand {
+  font-family: var(--eq-font);
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+
+nav .links {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  font-size: 1.3rem;
+  color: var(--white);
+  transition: color 0.3s, border-bottom 0.3s;
+  padding-bottom: 4px;
+}
+
+nav a:hover, nav a.active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  background: radial-gradient(ellipse at center, #1a1510 0%, var(--black) 70%);
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(196,160,53,0.03) 2px,
+    rgba(196,160,53,0.03) 4px
+  );
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px rgba(196,160,53,0.3);
+}
+
+.hero .subtitle {
+  font-family: var(--sub-font);
+  font-size: 2rem;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+
+.hero .tagline {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+/* ---------- SECTIONS ---------- */
+
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-divider {
+  width: 80px;
+  height: 2px;
+  background: var(--gold);
+  margin: 3rem auto;
+}
+
+/* ---------- CARDS ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 30px rgba(196,160,53,0.15);
+}
+
+.card h4 {
+  margin-bottom: 0.8rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #999;
+}
+
+.card .cta {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--sub-font);
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+
+/* ---------- TABLES ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+thead {
+  background: var(--smoke);
+}
+
+th {
+  font-family: var(--sub-font);
+  font-size: 1.1rem;
+  color: var(--gold);
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--gold);
+}
+
+td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: #bbb;
+}
+
+tr:hover td {
+  background: rgba(196,160,53,0.05);
+}
+
+.zone-sub { color: var(--zone-sub); font-weight: bold; }
+.zone-struct { color: var(--zone-struct); font-weight: bold; }
+.zone-dom { color: var(--zone-dom); font-weight: bold; }
+
+/* ---------- STATS ROW ---------- */
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat-block {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  color: var(--gold);
+  display: block;
+}
+
+.stat-label {
+  font-family: var(--sub-font);
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+}
+
+/* ---------- CALLOUT ---------- */
+
+.callout {
+  background: var(--smoke);
+  border-left: 4px solid var(--gold);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.callout p { color: #bbb; margin: 0; }
+.callout strong { color: var(--gold-light); }
+
+/* ---------- DICTIONARY ---------- */
+
+.dict-entry {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.dict-term {
+  font-family: var(--eq-font);
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+
+.dict-def {
+  font-size: 1rem;
+  color: #bbb;
+  margin-top: 0.4rem;
+}
+
+.dict-num {
+  font-family: var(--eq-font);
+  color: var(--gold-light);
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+footer .brand {
+  font-family: var(--eq-font);
+  font-size: 1.2rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- EMAIL FORM ---------- */
+
+.email-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.email-form input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--white);
+  font-family: var(--body-font);
+  font-size: 1rem;
+}
+
+.email-form input::placeholder { color: var(--text-dim); }
+
+.email-form button {
+  padding: 0.8rem 1.5rem;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  border-radius: 6px;
+  font-family: var(--sub-font);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.email-form button:hover {
+  background: var(--gold-light);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+  .hero .subtitle { font-size: 1.5rem; }
+  .equation { font-size: 1.8rem; }
+  nav .links { gap: 1rem; }
+  nav a { font-size: 1.1rem; }
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.8rem; }
+  .stat-number { font-size: 2rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}
